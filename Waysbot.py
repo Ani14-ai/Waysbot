@@ -346,7 +346,7 @@ chatbot_model= klaaplanet_bot()
 def index():
     return render_template("frontendupdated (3).html")
 
-@app.route('/api/chat', methods=['POST'])
+@app.route('/api/Waysbot', methods=['POST'])
 def chat():
     global conversation_history
     global session_start_time
