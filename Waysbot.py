@@ -354,7 +354,7 @@ def chat():
     time_taken = (end_time - start_time)
     conn = pyodbc.connect(db_connection_string)
     cursor = conn.cursor()
-    query = """UPDATE Kalaachat_hist 
+    query = """UPDATE Wayschat_hist 
                SET response_time = ?  
                WHERE session_id = ?"""
     cursor.execute(query,time_taken,session)
