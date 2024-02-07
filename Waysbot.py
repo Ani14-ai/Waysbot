@@ -342,11 +342,11 @@ def store_user_information(cursor, name, email, phone, average_sentiment, tags,s
 
 chatbot_model= klaaplanet_bot()
 
-@app.route('/')
+@app.route('/api/Waysbot')
 def index():
     return render_template("frontendupdated (3).html")
 
-@app.route('/api/Waysbot', methods=['POST'])
+@app.route('/api/Waysbot/chat', methods=['POST'])
 def chat():
     global conversation_history
     global session_start_time
