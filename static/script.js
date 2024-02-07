@@ -72,8 +72,8 @@ async function sendMessage(sender, message) {
 
     // Append the user or chatbot icon to the message bubble
     let iconSrc = sender === 'You'
-        ? '../images/userImage.svg'
-        : '../images/bot-gif.gif';
+        ? '../static/userImage.svg'
+        : '../static/bot-gif.gif';
 
     let iconAlt = sender === 'You' ? 'User Icon' : 'Chatbot Icon';
 
@@ -123,7 +123,7 @@ function receiveMessage(sender, message) {
     let formattedMessage = messageLines.join('<br>');
 
     chatDisplay.innerHTML += `<div class="${messageClass}">
-                                <img src="${sender === 'You' ? '../images/userImage.svg' : '../images/bot-gif.gif'}" alt="${sender} Icon" class="${sender === 'You' ? 'user-icon' : 'chatbot-icon'}">
+                                <img src="${sender === 'You' ? '../static/userImage.svg' : '../static/bot-gif.gif'}" alt="${sender} Icon" class="${sender === 'You' ? 'user-icon' : 'chatbot-icon'}">
                                 <div class="message-bubble">${formattedMessage}</div>
                                 ${sender === 'Chatbot' ? `<img class="sound-icon" src="https://cdn-icons-png.flaticon.com/128/4340/4340178.png" onclick="toggleSound('${formattedMessage}')"> <img class="mic-icon" src="https://cdn-icons-png.flaticon.com/128/4340/4340437.png" style="width: 20px; height: 20px; cursor: pointer; position: absolute; left: 10px; bottom: 110px; " onclick="toggleChatbotVoice()">` : ''}                                
                             </div>`;
