@@ -36,7 +36,7 @@ def preprocess_text(text):
     tokens = [porter.stem(word) for word in tokens]
     return ' '.join(tokens)
 
-@app.route("/generate_sessionid",methods=['GET'])
+@app.route("/api/Waysbot/generate_sessionid",methods=['GET'])
 def generate_session_id():
     return str(uuid.uuid4())
 
