@@ -162,7 +162,7 @@ let isSpeaking = false;
 
 function speakChatbotIntroduction() {
     // Speak the initial chatbot introduction
-    let introductionMessage = "Hello! I am the Waysahead Bot, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything";
+    let introductionMessage = "Hello! I am LUMI G24R, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything";
     speakMessage(introductionMessage);
 }
 
@@ -197,7 +197,7 @@ function getUserInput() {
 
 function introduceChatbot() {
     setTimeout(function () {
-        receiveMessage("Chatbot", "Hello! I am the Waysahead Bot, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything");
+        receiveMessage("Chatbot", "Hello! I am LUMI G24R, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything");
     }, 1000);
 }
 

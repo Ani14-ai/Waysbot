@@ -2,7 +2,7 @@
 
 :root {
     --chat-heading-color: #00B0F0;
-    --chat-background-color: #001A23;
+    --chat-background-color: rgba(0, 26, 35, 0.85);
 }
 
 body {
@@ -50,7 +50,6 @@ body {
     flex-direction: column;
     gap: 15px;
     flex-grow: 5;
-    background: var(--chat-background-color);
     border-radius: 0px;
 }
 
