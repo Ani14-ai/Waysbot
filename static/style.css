@@ -3,7 +3,6 @@
 :root {
     --chat-heading-color: #00B0F0;
     --chat-background-color: rgba(0, 26, 35, 0.85);
-    color-scheme: dark;
 }
 
 body {
