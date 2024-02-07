@@ -352,7 +352,7 @@ def chat():
     global session_start_time
     start_time = time.time()
     session=request.headers["session-id"]
-    user_input = request.form['user_input']
+    user_input = request.json.get('user_input')
     if user_input.lower() in ['bye', 'exit', 'quit']:
         response = "Goodbye!"
         conversation_history = []
