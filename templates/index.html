@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Visa Support</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="close-chat" onclick="closeChatbot()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_7_763)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10.8285 10.12C11.024 10.315 11.024 10.635 10.8285 10.83C10.6335 11.025 10.3165 11.025 10.121 10.83L8.00299 8.71002L5.87 10.845C5.673 11.04 5.35401 11.04 5.15701 10.845C4.96051 10.645 4.96051 10.325 5.15701 10.13L7.29001 7.995L5.172 5.88C4.9765 5.685 4.9765 5.36498 5.172 5.16998C5.3665 4.97498 5.6835 4.97498 5.879 5.16998L7.99701 7.28998L10.146 5.14001C10.343 4.94501 10.6615 4.94501 10.8585 5.14001C11.055 5.34001 11.055 5.65498 10.8585 5.85498L8.70999 8.005L10.8285 10.12ZM8 0C3.5815 0 0 3.58 0 8C0 12.42 3.5815 16 8 16C12.4185 16 16 12.42 16 8C16 3.58 12.4185 0 8 0Z"
+                        fill="white" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_7_763">
+                        <rect width="16" height="16" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+
+        </div>
+        <div id="chat-header">
+            <img src='https://www.waysaheadglobal.com/assets/images/logo.png' alt="logo" id="chat-logo">
+            Waysahead BOT
+        </div>
+
+        <div id="chat-display"></div>
+
+        <div id="user-input-container">
+            <svg class="user-icon-input" width="30" height="30" viewBox="0 0 30 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="15" cy="15" r="14.5" stroke="#00B0F0" />
+                <g clip-path="url(#clip0_7_731)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10.5 12C10.5 9.51472 12.5147 7.5 15 7.5C17.4853 7.5 19.5 9.51472 19.5 12C19.5 14.4853 17.4853 16.5 15 16.5C12.5147 16.5 10.5 14.4853 10.5 12Z"
+                        fill="#00B0F0" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10.0732 18.6769C11.2919 18.166 12.9175 18 15 18C17.0782 18 18.7013 18.1653 19.9189 18.6736C21.2259 19.2191 22.0281 20.146 22.4557 21.494C22.6146 21.995 22.2388 22.5 21.7194 22.5H8.27594C7.75861 22.5 7.38509 21.9973 7.54267 21.499C7.96902 20.1511 8.76839 19.2239 10.0732 18.6769Z"
+                        fill="#00B0F0" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_7_731">
+                        <rect width="18" height="18" fill="white" transform="translate(6 6)" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <textarea id="user-input" placeholder="Ask me anything...!!"></textarea>
+            <input type="file" id="audio-input" accept="audio/*" style="display: none;">
+
+            <svg id="microphone-icon" onclick="startRecording()" width="30" height="30" viewBox="0 0 30 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="15" cy="15" r="14.5" stroke="#00B0F0" />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M9.84616 12.9165V14.8618C9.84616 17.308 11.9345 19.2992 14.5 19.2992C17.0655 19.2992 19.1538 17.308 19.1538 14.8618V12.9165H20V14.8618C20 17.6176 17.7588 19.884 14.9231 20.0907L14.9231 22.1932H17.0385V23H11.9615V22.1932H14.0769L14.0769 20.0907C11.2412 19.884 9 17.6176 9 14.8618V12.9165H9.84616ZM14.5 7C16.5993 7 18.3077 8.62896 18.3077 10.6307V14.6647C18.3077 16.6664 16.5993 18.2954 14.5 18.2954C12.4007 18.2954 10.6923 16.6664 10.6923 14.6647V10.6307C10.6923 8.62896 12.4007 7 14.5 7Z"
+                    fill="#00B0F0" />
+            </svg>
+
+            <svg id="send-button" onclick="sendMessage('You', getUserInput())" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="15" cy="15" r="14.5" stroke="#00B0F0" />
+                <path
+                    d="M22.245 15C22.2456 15.284 22.1656 15.5623 22.0142 15.8027C21.8629 16.043 21.6464 16.2354 21.39 16.3575L10.4025 21.5625C10.2014 21.6721 9.97861 21.7362 9.74999 21.75C9.4998 21.7495 9.25371 21.6864 9.03414 21.5665C8.81456 21.4465 8.62847 21.2736 8.4928 21.0634C8.35713 20.8532 8.2762 20.6124 8.25737 20.3629C8.23854 20.1134 8.28241 19.8632 8.38499 19.635L10.095 15.75H14.25C14.4489 15.75 14.6397 15.671 14.7803 15.5303C14.921 15.3897 15 15.1989 15 15C15 14.8011 14.921 14.6103 14.7803 14.4697C14.6397 14.329 14.4489 14.25 14.25 14.25H10.095L8.38499 10.4025C8.26108 10.1229 8.22559 9.81212 8.28329 9.51179C8.34098 9.21146 8.48909 8.93595 8.70777 8.72216C8.92645 8.50838 9.20525 8.36654 9.50681 8.31566C9.80837 8.26479 10.1183 8.3073 10.395 8.4375L21.3825 13.6425C21.6403 13.7635 21.8583 13.9555 22.0111 14.1959C22.1638 14.4363 22.2449 14.7152 22.245 15Z"
+                    fill="#00B0F0" />
+            </svg>
+        </div>
+    </div>
+
+    <div id="chatbot-icon" onclick="toggleChatbot()" data-tooltip="Click here for assistance">
+        <img src="../images/bot-gif.gif" alt="Chatbot Icon">
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+
+</html>

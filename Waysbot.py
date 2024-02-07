@@ -344,7 +344,7 @@ chatbot_model= klaaplanet_bot()
 
 @app.route('/api/Waysbot')
 def index():
-    return render_template("frontendupdated (3).html")
+    return render_template("index.html")
 
 @app.route('/api/Waysbot/chat', methods=['POST'])
 def chat():
