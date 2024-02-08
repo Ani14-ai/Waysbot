@@ -114,8 +114,26 @@ def gpt(prompt,conversation_history):
                 {"role": "assistant", "content": "Excellent point! In today's landscape, data analytics is indispensable. It provides actionable insights, understands historical patterns, identifies industry trends, and forecasts financial trajectories. It's not just an option but a necessity for converting scattered data into valuable insights, driving strategic decision-making and sustainable growth across all sectors."},
                 {"role": "user", "content": "How does WaysAhead Global empower small businesses?"},
                 {"role": "assistant", "content": "I'm glad you asked! WaysAhead Global empowers small businesses by democratizing access to advanced data analytics and AI technologies. We make these powerful tools affordable and accessible, bridging the gap between businesses and the potential of data analytics. Our focus extends beyond analytics to nurturing innovation and entrepreneurship, creating a holistic approach for businesses to thrive in an increasingly data-driven world."},
+                {"role": "user", "content": "Who are the founders of WaysAhead Global?"}, 
+                {"role": "assistant", "content": "WaysAhead Global is founded by Mr. Rupam Bhattacharjee and Dr. Gopa Bhattacharjee. Their vision and leadership drive our commitment to democratize access to advanced data analytics and AI technologies, fostering innovation and growth across various industries."},
+                {"role": "user", "content": "What motivates the founders of WaysAhead Global?"}, 
+                {"role": "assistant", "content": "The founders, Mr. Rupam Bhattacharjee and Dr. Gopa Bhattacharjee, are motivated by a profound mission. They aim to impact the lives and businesses of one million entities by 2030. Their commitment to continuous innovation, scalability, and sustainability drives WaysAhead Global's vision to be a trusted leader in data analytics and AI, making a lasting positive impact globally."},
+                {"role": "user", "content": "How do the founders envision the role of WaysAhead Global in the global business landscape?"}, 
+                {"role": "assistant", "content": "The founders envision WaysAhead Global as a transformative force in the global business landscape. Their ambition is to drive innovation, foster growth, and create positive change. By leveraging data analytics, AI, and emerging technologies, WaysAhead Global, under the leadership of Mr. Rupam Bhattacharjee and Dr. Gopa Bhattacharjee, aspires to be a catalyst for success, not just for the company but for clients, partners, and stakeholders worldwide."},
+                {"role": "user", "content": "What message do the founders have for clients?"}, 
+                {"role": "assistant", "content": "As founders, Mr. Rupam Bhattacharjee and Dr. Gopa Bhattacharjee convey a powerful message to clients. They emphasize that WaysAhead Global is more than a vendor; it's a partner in success. With a commitment to transparency, innovation, and comprehensive solutions, the founders assure clients of a collaborative relationship built on trust, integrity, and mutual respect. They stand by clients every step, providing the support and insights needed to navigate the complexities of the modern business landscape with confidence and clarity."},
                 {"role": "user", "content": "What's your Founder's message to clients of WaysAhead Global?"},
+                {"role": "user", "content": "Who is the CEO of WaysAhead Global?"}, 
+                {"role": "assistant", "content": "The CEO of WaysAhead Global is Mr. Rupam Bhattacharjee. His visionary leadership has been instrumental in steering the company through strategic expansions, overcoming challenges, and fostering a culture of innovation and growth."},
                 {"role": "assistant", "content": "Absolutely! This is what our founder has to say - As the founder, my message is simple yet profound. We're here to be your partner in success, not just a vendor. Our commitment to transparency, innovation, and comprehensive solutions sets us apart. We deliver not just projects but results that drive meaningful change and growth for your business. From product development to data analytics to data storytelling, we stand by you every step, helping you navigate the complexities of the modern business landscape with confidence and clarity. Together, let's embark on a journey of innovation, growth, and success."},
+                {"role": "user", "content": "Can you share more about Mr. Rupam Bhattacharjee's experience and the journey of WaysAhead Global?"}, 
+                {"role": "assistant", "content": "Certainly! In 2014, Mr. Rupam Bhattacharjee ventured beyond India, gaining insights from Singapore's businesses and standards. Until 2016, he immersed himself in regular consulting work. The turning point came in 2016 when WaysAhead Global secured substantial projects in the UAE. On July 1, 2017, Mr. Rupam, along with Dr. Gopa Bhattacharjee, founded the company in a small Bengaluru office. Expanding to the UAE in 2018 marked the company's initial five years. Despite the challenges of 2021, they opened an office in Delhi. In 2023, focusing on sustainability, WaysAhead Global celebrated its 6th year in the UAE. Notably, the team achieved a record by completing an MVP in just 54 days. As we step into 2024, it's poised to be a year of remarkable growth and scalability for WaysAhead Global."},
+                {"role": "user", "content": "Tell me about the expansion and milestones of WaysAhead Global, especially during the pandemic."}, 
+                {"role": "assistant", "content": "WaysAhead Global's journey reflects resilience and strategic expansion. After initiating operations in the UAE in 2018, the pandemic posed challenges, but it didn't hinder progress. In 2021, despite the global turmoil, WaysAhead Global expanded to Delhi, showcasing adaptability. The year 2023 became pivotal, focusing on sustainability, strategy, and streamlining operations. Completing an MVP in just 54 days attests to the team's prowess. Looking ahead to 2024, WaysAhead Global is poised for significant growth and scalability, building on a foundation of experience, innovation, and unwavering determination."},
+                {"role": "user", "content": "Can you share the journey and milestones of WaysAhead Global since its inception?"}, 
+                {"role": "assistant", "content": "Certainly! In 2014, Mr. Rupam Bhattacharjee embarked on a journey, observing businesses in Singapore and setting the foundation for WaysAhead Global. Until 2016, he focused on regular consulting work. By 2016, the company secured substantial projects in the UAE. On July 1, 2017, Mr. Rupam and Dr. Gopa Bhattacharjee founded WaysAhead Global in a small office in Indira Nagar, Bengaluru. In 2018, they expanded to the UAE, marking five successful years. Despite the pandemic in 2021, WaysAhead Global opened an office in Delhi, followed by a strategic year in 2023 focusing on sustainability and streamlining. Notably, the team achieved an impressive milestone of completing an MVP in just 54 days. As we step into 2024, it's poised to be a year of growth and scalability for WaysAhead Global."},
+                {"role": "user", "content": "Tell me more about WaysAhead Global's expansion and milestones."}, 
+                {"role": "assistant", "content": "WaysAhead Global's expansion journey is remarkable. In 2021, amid the pandemic, the company expanded its presence by establishing an office in Delhi. The subsequent year, 2023, was pivotal, dedicated to sustainability, strategizing, and streamlining operations. Noteworthy is the company's exceptional record of delivering an MVP in just 54 days, showcasing the team's supercharged capabilities. As we step into 2024, WaysAhead Global is geared up for a year of significant growth and scalability, building upon its strong foundation and successful track record."}
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
@@ -187,13 +205,14 @@ def klaaplanet_bot():
         nonlocal conversation_history
         nonlocal sentiment_scores
         nonlocal chat_counter
+        nonlocal tag
         nonlocal c       
         user_input_processed = preprocess_text(user_input)        
         fetched_data = fetch_session_id_from_database(session) 
         if not fetched_data:
             sentiment_scores = []
             conversation_history = []
-            tags=[]
+            tag=[]
             c=0
         tags = tag.append(extract_tags(user_input))
         sentiment = get_sentiment_score(user_input)
@@ -238,9 +257,10 @@ def extract_tags(text):
     tags = []
     tag_keywords = {
     'WaysAheadGlobal': ['WaysAhead Global', 'company'],
-    'DigitalTransformation': ['digital transformation', 'services'],
+    'DigitalTransformation': ['digital transformation'],
     'DataAnalytics': ['data analytics', 'insights'],
     'AI': ['artificial intelligence', 'AI'],
+    'Rupam': ['Rupam' , 'journey of Rupam', 'experience of Rupam'],
     'StartupServices': ['startup services', 'entrepreneurship'],
     'MVPDevelopment': ['Minimum Viable Product', 'development'],
     'Vision': ['vision', 'company vision'],
