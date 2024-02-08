@@ -393,6 +393,25 @@ def chat():
     conn.close()
     return jsonify({'response': response})
 
+@app.route('/speech-to-text', methods=['POST'])
+def speech_to_text():
+    try:
+        if 'audio' not in request.files:
+            return jsonify({'error': 'No audio file provided'}), 400
+
+        audio_file = request.files['audio']
+        recognizer = sr.Recognizer()
+
+        with sr.AudioFile(audio_file) as source:
+            audio_data = recognizer.record(source)
+
+        text = recognizer.recognize_google(audio_data)
+
+        return jsonify({'transcription': text})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=False,port=3026)
