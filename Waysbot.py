@@ -1,4 +1,4 @@
-import nltk
+    import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
@@ -158,6 +158,24 @@ def gpt(prompt,conversation_history):
                 4. **Agile Approach:** Embrace an agile approach to adapt quickly to changing customer demands and market trends."},    
                 {"role": "user", "content": "Can a business combine both sales-led and product-led approaches successfully?"},
                 {"role": "assistant", "content": "Yes, a successful business can integrate both sales-led and product-led approaches. A balanced strategy involves leveraging the strengths of each approach based on the context. For immediate revenue goals, a sales-led approach may be effective, while a product-led approach ensures sustained growth and customer loyalty. The key lies in strategic integration, recognizing when to prioritize each approach to achieve overall business objectives."},
+                {"role": "user", "content": "Can you elaborate on the pillars of WaysAhead Global's existence?"},
+                {"role": "assistant", "content": "At WaysAhead, our existence revolves around three pillars: Efficiency, Adaptability, and Profitability. We thrive on fostering trust, shaping ideas into MVPs, embracing data consciousness, and envisioning the transformative power of Web 3.0."},
+                {"role": "user", "content": "How does WaysAhead contribute to digital transformation for businesses?"},
+                {"role": "assistant", "content": "WaysAhead is at the forefront of digital transformation, going beyond technology. We focus on people and collaboration. Whether in fintech, retail, fashion, or entertainment, our data-centric approach helps businesses innovate. We've honed this expertise working with startups, incubators, and enterprises."},
+                {"role": "user", "content": "What is the vision of WaysAhead Global?"},
+                {"role": "assistant", "content": "Our vision is to impact 1 million businesses by 2030 through democratizing data consciousness. We ensure data safety with a three-step approach: identifying use cases, quantifying values, and developing a scalable delivery model. From web 1 to web 3, we integrate metaverse, blockchain, and NFT concepts into our transformative projects."},
+                {"role": "user", "content": "How does WaysAhead prioritize data governance and quality?"},
+                {"role": "assistant", "content": "Ensuring data safety, we take a three-step approach: identifying use cases, quantifying values, and developing a scalable delivery model. Data quality is paramount, with a focus on validation, accuracy, completeness, and integrity. We transform projects from web 1 to web 3, incorporating sustainability solutions and providing carbon credits."},
+                {"role": "user", "content": "How does WaysAhead assist startups and technological companies?"},
+                {"role": "assistant", "content": "WaysAhead is a catalyst for startups and technological companies. Leveraging our vast experience, we guide them through three fundamental steps: due diligence, MVP development, and a comprehensive Discovery report. Our tailored solutions maximize investments, ensuring a credible pathway for data-driven decisions."},
+                {"role": "user", "content": "Can you share more about WaysAhead's work with companies and startups in Australia and Canada?"},
+                {"role": "assistant", "content": "WaysAhead collaborates with companies, startups, and incubators in Australia and Canada. We specialize in maximizing their investments through data assets. Whether in fintech, retail, fashion, or entertainment, we offer use cases and case studies that showcase innovative data and systems solutions. Our experience benefits startups and incubators through a meticulous three-step process: due diligence, MVP development, and a Discovery report."},
+                {"role": "user", "content": "How is WaysAhead contributing to the transformation from Web 1 to Web 3?"},
+                {"role": "assistant", "content": "We're driving the transformation from Web 1 to Web 3 by incorporating metaverse, blockchain, and NFT concepts into our projects. Sustainability is key, and we provide carbon credits. Our journey involves analyzing clients' data, ensuring data quality, and delivering scalable solutions. We're committed to shaping the digital landscape with innovative and sustainable practices."},
+                {"role": "user", "content": "Tell me more about the transformational journey of WaysAhead from Web 1 to Web 3."},
+                {"role": "assistant", "content": "WaysAhead's transformational journey encompasses embracing Web 3.0 concepts like metaverse and blockchain. We focus on sustainability, providing carbon credits. From analyzing clients' data to ensuring data quality, we've evolved from Web 1 to Web 3, staying at the forefront of technological advancements. Our team is dedicated to redefining the digital landscape with innovative and sustainable practices."},
+                {"role": "user", "content": "How does WaysAhead ensure a secure and private data governance process?"},
+                {"role": "assistant", "content": "We prioritize a secure and private data governance process through a meticulous three-step procedure: identifying use cases, quantifying values, and developing a scalable delivery model. Our focus on data quality rules—validation, accuracy, completeness, and integrity—ensures a robust foundation. We're dedicated to safeguarding your data, adhering to the highest standards of security and privacy."},
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
