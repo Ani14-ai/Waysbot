@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 import os
 import speech_recognition as sr
 import kalaaplanet
+import Renoswift
 load_dotenv()
 client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
@@ -464,7 +465,7 @@ def chat_kalaa():
     conn.close()
     return jsonify({'response': response})
 
-chatbot_model2= Reno_bot()
+chatbot_model2= Renoswift.Reno_bot()
 @app.route('/api/Waysbot/chat/Renoswift', methods=['POST'])
 def chat():
     global conversation_history
