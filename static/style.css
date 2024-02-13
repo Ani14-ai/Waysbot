@@ -5,6 +5,16 @@
     --chat-background-color: rgba(0, 26, 35, 0.85);
 }
 
+:root.renoswift {
+    --chat-heading-color: #fad02c;
+    --chat-background-color: rgba(35, 31, 0, 0.85);
+}
+
+:root.kalaa {
+    --chat-heading-color: #c69b6b;
+    --chat-background-color: rgba(35, 23, 0, 0.85);
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -13,6 +23,14 @@ body {
     word-spacing: -3px;
     transition: background-color 0.5s;
     overflow-y: auto;
+}
+
+circle, path {
+    stroke: var(--chat-heading-color);
+}
+
+path:not(#close) {
+    fill: var(--chat-heading-color);
 }
 
 #chat-container {
@@ -28,13 +46,16 @@ body {
 
     display: flex;
     flex-direction: column;
-    animation: fadeIn 0.5s ease-out;
     transform-origin: top right;
     transform: scale(0);
     transition: transform 0.5s ease-in-out;
     mix-blend-mode: normal;
     background: var(--chat-background-color);
     border: 1.5px solid var(--chat-heading-color)
+}
+
+.fadeInAnimation {
+    animation: fadeIn 0.5s ease-out;
 }
 
 #chat-container.zoom-in {
@@ -51,6 +72,7 @@ body {
     gap: 15px;
     flex-grow: 5;
     border-radius: 0px;
+    position: relative;
 }
 
 #chatbot-icon {
@@ -127,7 +149,7 @@ body {
     }
 }
 
-#chat-header {
+.chat-header {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 450;
@@ -279,7 +301,6 @@ body {
     outline: none;
     background-color: inherit;
     border: 2px solid var(--chat-heading-color);
-    color: black;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     font-family: 'Poppins', sans-serif;
     color: var(--chat-heading-color);
@@ -360,4 +381,12 @@ body {
     height: 23px;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.sound {
+    aspect-ratio: 1/1;
+    width: 25px;
+    margin-left: 0.5rem;
+    position: fixed;
+    bottom: 6.5rem;
 }

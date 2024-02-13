@@ -18,7 +18,7 @@ import time
 from dotenv import load_dotenv
 import os
 load_dotenv()
-client = OpenAI(api_key=os.getenv("openai_key"))
+client = OpenAI(api_key=os.getenv("openai_key_kalaa"))
 nltk.download('averaged_perceptron_tagger')
 db_connection_string = (
     "Driver={ODBC Driver 17 for SQL Server};"

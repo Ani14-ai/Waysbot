@@ -1,3 +1,5 @@
+let chatBot = "";
+
 async function generateSessionid() {
     if (!sessionStorage.getItem('session-id')) {
         const response = await fetch('https://skioapi.idea2mvp.co/api/Waysbot/generate_sessionid');
@@ -8,7 +10,26 @@ async function generateSessionid() {
 
 window.onload = () => {
     generateSessionid();
-    introduceChatbot();
+    const bot = new URLSearchParams(window.location.search.split('?')[1]);
+
+    if (bot.get('bot') === "renoswift") {
+        document.getElementById('chat-header-waysbot').style.display = "none";
+        document.getElementById('chat-header-kalaa').style.display = "none";
+        introduceChatbot("Hello! I am RenoSwift Bot and I am here to help you reinvent your bathroom. I can help you with bathroom design ideas, product recommendations, and much more. Let's get started!");
+    } else if (bot.get('bot') === "kalaa") {
+        document.getElementById('chat-header-waysbot').style.display = "none";
+        document.getElementById('chat-header-renoswift').style.display = "none";
+        introduceChatbot("Hello! I am Kalaa Planet Bot and I am here to take you on an artistic journey. Come and explore the world of Kalaa Planet with me. I will be happy to be your guide.");
+    } else {
+        document.getElementById('chat-header-renoswift').style.display = "none";
+        document.getElementById('chat-header-kalaa').style.display = "none";
+        introduceChatbot("Hello! I am LUMI G24R, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything.");
+    }
+
+    if (bot.get('bot') === "renoswift" || bot.get('bot') === "kalaa") {
+        chatBot = bot.get('bot');
+        document.querySelector('html').classList.add(chatBot);
+    }
 }
 
 
@@ -92,8 +113,14 @@ async function sendMessage(sender, message) {
     // Clear the user input
     document.getElementById("user-input").value = "";
 
+    let url = `https://testapi.unomiru.com/api/Waysbot/chat`;
+
+    if (chatBot === "renoswift" || chatBot === "kalaa") {
+        url = `https://testapi.unomiru.com/api/Waysbot/chat/${chatBot}`;
+    }
+
     // Send user input to the server
-    const response = await fetch('https://skioapi.idea2mvp.co/api/Waysbot/chat', {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -124,8 +151,7 @@ function receiveMessage(sender, message) {
 
     chatDisplay.innerHTML += `<div class="${messageClass}">
                                 <img src="${sender === 'You' ? '../static/userImage.svg' : '../static/bot-gif.gif'}" alt="${sender} Icon" class="${sender === 'You' ? 'user-icon' : 'chatbot-icon'}">
-                                <div class="message-bubble">${formattedMessage}</div>
-                                ${sender === 'Chatbot' ? `<img class="sound-icon" src="https://cdn-icons-png.flaticon.com/128/4340/4340178.png" onclick="toggleSound('${formattedMessage}')"> <img class="mic-icon" src="https://cdn-icons-png.flaticon.com/128/4340/4340437.png" style="width: 20px; height: 20px; cursor: pointer; position: absolute; left: 10px; bottom: 110px; " onclick="toggleChatbotVoice()">` : ''}                                
+                                <div class="message-bubble ${messageClass === 'chatbot-message' && 'chatbot'}">${formattedMessage}</div>                             
                             </div>`;
 
 
@@ -140,11 +166,22 @@ function receiveMessage(sender, message) {
 }
 
 
-let isChatbotVoiceMuted = true;
+let isChatbotVoiceMuted = false;
 let currentUtterance;
 
-function toggleChatbotVoice() {
+function toggleChatbotVoice(type) {
     isChatbotVoiceMuted = !isChatbotVoiceMuted;
+
+    if (type === 'on') {
+        document.getElementById('sound-on').style.display = 'none';
+        document.getElementById('sound-off').style.display = 'block';
+    } else {
+        document.getElementById('sound-off').style.display = 'none';
+        document.getElementById('sound-on').style.display = 'block';
+    }
+
+    currentUtterance = new SpeechSynthesisUtterance(Array(...document.querySelectorAll(".chatbot")).at(-1).textContent)
+    currentUtterance.lang = 'en';
 
     if (isChatbotVoiceMuted && isSpeaking) {
         // If currently speaking, cancel the speech
@@ -163,6 +200,15 @@ let isSpeaking = false;
 function speakChatbotIntroduction() {
     // Speak the initial chatbot introduction
     let introductionMessage = "Hello! I am LUMI G24R, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything.";
+
+    if (chatBot === "renoswift") {
+        introductionMessage = "Hello! I am RenoSwift Bot and I am here to help you reinvent your bathroom. I can help you with bathroom design ideas, product recommendations, and much more. Let's get started!";
+    }
+
+    if (chatBot === "kalaa") {
+        introductionMessage = "Hello! I am Kalaa Planet Bot and I am here to take you on an artistic journey. Come and explore the world of Kalaa Planet with me. I will be happy to be your guide.";
+    }
+
     speakMessage(introductionMessage);
 }
 
@@ -195,9 +241,9 @@ function getUserInput() {
     return document.getElementById("user-input").value;
 }
 
-function introduceChatbot() {
+function introduceChatbot(message) {
     setTimeout(function () {
-        receiveMessage("Chatbot", "Hello! I am LUMI G24R, Waysahead's latest AI creation. I am still in the learning process and I will be happy to assist you with anything.");
+        receiveMessage("Chatbot", message);
     }, 1000);
 }
 
@@ -235,6 +281,7 @@ function startRecording() {
         recognition.lang = 'en-US';
         recognition.onstart = function () {
             isRecording = true;
+            console.log('Speech recognition started.')
         };
         recognition.onresult = function (event) {
             const result = event.results[event.results.length - 1][0].transcript;
@@ -311,6 +358,7 @@ function toggleChatbot() {
 
     if (chatContainer.style.display === 'none') {
         // Show the chat container
+        chatContainer.classList.add('fadeInAnimation');
         chatContainer.style.display = 'flex';
         chatIcon.style.display = 'none';
         // Start speaking when the chatbot interface is opened
@@ -318,6 +366,7 @@ function toggleChatbot() {
     } else {
         // Hide the chat container
         chatContainer.style.display = 'none';
+        chatContainer.classList.remove('fadeInAnimation');
 
         // Stop speaking when the chatbot interface is closed
         if (isSpeaking) {
