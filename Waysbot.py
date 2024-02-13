@@ -19,6 +19,7 @@ import time
 from dotenv import load_dotenv
 import os
 import speech_recognition as sr
+import kalaaplanet
 load_dotenv()
 client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
