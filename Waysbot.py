@@ -436,7 +436,7 @@ def chat():
     conn.close()
     return jsonify({'response': response})
 
-chatbot_model = kalaaplanet.klaaplanet_bot()
+chatbot_model1 = kalaaplanet.klaaplanet_bot()
 @app.route('/api/Waysbot/chat/kalaa', methods=['POST'])
 def chat_kalaa():
     global conversation_history
@@ -450,7 +450,7 @@ def chat_kalaa():
     elif user_input.lower() in ['hi', 'hello', 'hey']:
         response = "Hello! How can I assist you today?"
     else:
-        response = chatbot_model(user_input,session)
+        response = chatbot_model1(user_input,session)
     end_time = time.time()
     time_taken = (end_time - start_time)
     conn = pyodbc.connect(db_connection_string)
