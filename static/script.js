@@ -2,7 +2,7 @@ let chatBot = "";
 
 async function generateSessionid() {
     if (!sessionStorage.getItem('session-id')) {
-        const response = await fetch('https://skioapi.idea2mvp.co/api/Waysbot/generate_sessionid');
+        const response = await fetch('https://testapi.unomiru.com/api/Waysbot/generate_sessionid');
         const sessionId = await response.text();
         sessionStorage.setItem('sessionId', sessionId);
     }
@@ -109,6 +109,8 @@ async function sendMessage(sender, message) {
 
     // Append the message bubble to the chat display
     chatDisplay.appendChild(messageBubble);
+
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
 
     // Clear the user input
     document.getElementById("user-input").value = "";
