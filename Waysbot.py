@@ -466,8 +466,8 @@ def chat_kalaa():
     return jsonify({'response': response})
 
 chatbot_model2= Renoswift.Reno_bot()
-@app.route('/api/Waysbot/chat/Renoswift', methods=['POST'])
-def chat():
+@app.route('/api/Waysbot/chat/renoswift', methods=['POST'])
+def chat_renoswift():
     global conversation_history
     global session_start_time
     start_time = time.time()
