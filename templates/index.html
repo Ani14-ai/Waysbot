@@ -29,20 +29,43 @@
             LUMI G24R
         </div>
         <div id="chat-header-kalaa" class="chat-header">
-            <img src='https://www.kalaaplanet.in/images/newlogo.png' alt="logo" id="chat-logo" style="object-fit: contain;">
+            <img src='https://www.kalaaplanet.in/images/newlogo.png' alt="logo" id="chat-logo"
+                style="object-fit: contain;">
             Kalaa Bot
         </div>
         <div id="chat-header-renoswift" class="chat-header">
-            <img src='https://uat.renoswift.waysdatalabs.com/_next/image?url=%2Fassets%2Flogo.jpg&w=256&q=75' alt="logo" id="chat-logo" style="object-fit: contain;">
+            <img src='https://uat.renoswift.waysdatalabs.com/_next/image?url=%2Fassets%2Flogo.jpg&w=256&q=75' alt="logo"
+                id="chat-logo" style="object-fit: contain;">
             RenoSwift Bot
         </div>
 
         <div id="chat-display">
-            <img id="sound-off" class="sound" alt="sound-off" src="https://cdn-icons-png.flaticon.com/128/4340/4340437.png" onclick="toggleChatbotVoice('off')">            
-            <img id="sound-on" class="sound" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Audio-512.png" alt="sound-on" onclick="toggleChatbotVoice('on')">
+            <img id="sound-off" class="sound" alt="sound-off"
+                src="https://cdn-icons-png.flaticon.com/128/4340/4340437.png" onclick="toggleChatbotVoice('off')">
+            <img id="sound-on" class="sound" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Audio-512.png"
+                alt="sound-on" onclick="toggleChatbotVoice('on')">
         </div>
 
         <div id="user-input-container">
+            <div id="loading-spinner" class="loading-spinner" data-visibility="false">
+                <div>
+                    <svg width="24" height="24" stroke="#000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3" stroke-linecap="round">
+                                <animate attributeName="stroke-dasharray" dur="1.5s" calcMode="spline"
+                                    values="0 150;42 150;42 150;42 150" keyTimes="0;0.475;0.95;1"
+                                    keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1" repeatCount="indefinite" />
+                                <animate attributeName="stroke-dashoffset" dur="1.5s" calcMode="spline"
+                                    values="0;-16;-59;-59" keyTimes="0;0.475;0.95;1"
+                                    keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1" repeatCount="indefinite" />
+                            </circle>
+                            <animateTransform attributeName="transform" type="rotate" dur="2s"
+                                values="0 12 12;360 12 12" repeatCount="indefinite" />
+                        </g>
+                    </svg>
+                    <p>Generating &nbsp; response</p>
+                </div>
+            </div>
             <svg class="user-icon-input" width="30" height="30" viewBox="0 0 30 30" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <circle cx="15" cy="15" r="14.5" stroke="#00B0F0" />

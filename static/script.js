@@ -115,6 +115,8 @@ async function sendMessage(sender, message) {
     // Clear the user input
     document.getElementById("user-input").value = "";
 
+    document.getElementById('loading-spinner').setAttribute('data-visibility', 'true');
+
     let url = `https://testapi.unomiru.com/api/Waysbot/chat`;
 
     if (chatBot === "renoswift" || chatBot === "kalaa") {
@@ -134,7 +136,7 @@ async function sendMessage(sender, message) {
     });
 
     const data = await response.json();
-
+    document.getElementById('loading-spinner').setAttribute('data-visibility', 'false');
     // Display the chatbot's response
     receiveMessage("Chatbot", data.response);
 
