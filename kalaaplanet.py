@@ -710,6 +710,8 @@ def klaaplanet_bot():
                 response="Thank you for providing your phone number, Our team will get in touch with you shortly."
                 conversation_history.append({"role": "assistant", "content": response})
                 return response 
+            user_info_conn, user_info_cursor = get_user_info_database_connection()
+            update_user_information(user_info_cursor, session, average_sentiment, tag)
             response = gpt(user_input, conversation_history)
             conversation_history.append({"role": "assistant", "content": response})
             chat_counter += 1
