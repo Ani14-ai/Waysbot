@@ -387,6 +387,35 @@ def extract_tags(text):
             tags.append(pattern_tag)
     return tags
 
+def update_user_information(cursor, session_id, new_sentiment, new_tags):
+    flattened_list = [tag for sublist in new_tags for tag in sublist]
+    tags_str = ', '.join(flattened_list)
+    
+    adjusted_sentiment = (new_sentiment + 1) / 2
+    base_probability = len(flattened_list) * 0.1
+    
+    if base_probability == 0:
+        base_probability = 1
+    
+    sentiment_factor = max(adjusted_sentiment, 0.1)
+    raw_probability = base_probability * sentiment_factor
+    max_possible_value = len(flattened_list) * 0.1
+    
+    if max_possible_value == 0:
+        max_possible_value = 1
+    
+    probability = raw_probability / max_possible_value
+    
+    cursor.execute('''
+        UPDATE tb_Ways_chat
+        SET sentiment = ?,
+            probability = ?,
+            tags = ?
+        WHERE session_id = ?
+    ''', (new_sentiment, probability, tags_str, session_id))
+    
+    cursor.commit()
+
 def get_user_info_database_connection():
     user_info_conn = pyodbc.connect(db_connection_string)
     user_info_cursor = user_info_conn.cursor()
