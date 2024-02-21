@@ -409,7 +409,7 @@ def update_user_information(cursor, session_id, new_sentiment, new_tags):
     probability = raw_probability / max_possible_value
     
     cursor.execute('''
-        UPDATE tb_Ways_chat
+        UPDATE tb_Reno_chat
         SET sentiment = ?,
             probability = ?,
             tags = ?
