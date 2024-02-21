@@ -372,6 +372,17 @@ def extract_tags(text):
     'TrainingDevelopment': ['training and development', 'employee education', 'skill enhancement'],
     'QualityAssurance': ['quality assurance', 'certifications', 'compliance standards'],
     'ThoughtLeadership': ['thought leadership', 'industry insights', 'research publications'],
+    'Job': ['Job', 'developer', 'looking for a job'],
+    'JobOpportunity': ['Job opportunity in Waysahead' , 'Career' , 'Salary'],
+    'DigitalMarketingSpecialist': ['digital marketing', 'marketing specialist'],
+    'ASPNetCoreFullStackDeveloper': ['ASP.Net Core', 'full stack developer'],
+    'FrontEndDeveloper': ['front end developer', 'web development'],
+    'MernFullStackDeveloper': ['MERN stack', 'full stack developer'],
+    'PhpLaravelDeveloper': ['PHP', 'Laravel', 'backend development'],
+    'PythonDeveloper': ['Python', 'software development'],
+    'TechTeamLead': ['tech team lead', 'leadership'],
+    'TechnicalContentWriter': ['technical content', 'content writer'],
+    'UIUXDesigner': ['UI/UX design', 'user experience', 'user interface'],
     }
     for pattern_tag, keywords in tag_keywords.items():
         if any(keyword.lower() in text.lower() for keyword in keywords):
