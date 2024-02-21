@@ -203,7 +203,7 @@ let isSpeaking = false;
 
 function speakChatbotIntroduction() {
     // Speak the initial chatbot introduction
-    let introductionMessage = "Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things. Alternatively, if you're interested to take up a job with us, please let me know!"";
+    let introductionMessage = "Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things. Alternatively, if you're interested to take up a job with us, please let me know!";
 
     if (chatBot === "renoswift") {
         introductionMessage = "Hello! I am RenoSwift Bot and I am here to help you reinvent your bathroom. I can help you with bathroom design ideas, product recommendations, and much more. Let's get started!";
