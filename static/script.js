@@ -23,7 +23,7 @@ window.onload = () => {
     } else {
         document.getElementById('chat-header-renoswift').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
-        introduceChatbot("Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things.\n\nAlternatively, if you're interested to take up a job with us, please let me know!");
+        introduceChatbot("Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things.Alternatively, if you're interested to take up a job with us, please let me know!");
     }
 
     if (bot.get('bot') === "renoswift" || bot.get('bot') === "kalaa") {
