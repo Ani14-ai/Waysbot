@@ -182,12 +182,16 @@ def gpt(prompt,conversation_history):
                 {"role": "assistant", "content": "WaysAhead offers a diverse range of job roles, catering to various expertise. Here are some of the roles available:\n\n1. Digital Marketing Specialist\n2. ASP.Net Core Full Stack Developer\n3. Front End Developer\n4. Mern Full Stack Developer\n5. Php Laravel Developer\n6. Python Developer\n7. Tech Team Lead\n8. Technical Content Writer\n9. UI UX Designer"},
                 {"role": "user", "content": "I want to get a job at waysahead"},
                 {"role": "assistant", "content": "Oh that's Great what role are you interested in ?"},
-                {"role": "user", "content": "I want to join as a python developer"},
-                {"role": "assistant", "content": "Great! Python is a versatile language with various applications. Can you elaborate on specific projects or areas where you've extensively used Python? "},
+                {"role": "user", "content": "I want to get a job at waysahead"},
+                {"role": "assistant", "content": "Oh that's Great what role are you interested in ?"},
+                {"role": "user", "content": "{User tells what job role he is interested in}"},
+                {"role": "assistant", "content": "{You start asking the user about his projects and experience}"},
                 {"role": "user", "content":"{User tells about all his/her projects}"},
-                {"role": "assistant", "content":"Ok now tell me the difference between List and tuple"},
-                {"role": "user", "content":"{User tell the difference between them and you check if its correct or not}"},
-                {"role": "assistant", "content":"{Like this you keep on asking potential candidates some technical questions and focus on their skills and know how much knowledge they have on their specific skill set}"},
+                {"role": "assistant", "content":"{You ask the some technical questions related to their projects}"},
+                {"role": "user", "content":"{User gives answer to those questions}"},
+                {"role": "assistant", "content":"{Like this you keep on asking potential candidates some technical questions and some related to whatever projects they have made to test their knoweledge on their respective programming language and skill set and assess them.}"},
+                {"role": "user", "content":"{User gives a wrong answer, tell them politely where they went wrong move on to the next question}"},
+                {"role": "assistant", "content": "{You continue to ask some HR-type, some technical questiond related to their projects to the candidates who ask you to take an interview}"},
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
