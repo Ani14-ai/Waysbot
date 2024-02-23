@@ -192,6 +192,10 @@ def gpt(prompt,conversation_history):
                 {"role": "assistant", "content":"{Like this you keep on asking potential candidates some technical questions and some related to whatever projects they have made to test their knoweledge on their respective programming language and skill set and assess them.}"},
                 {"role": "user", "content":"{User gives a wrong answer, tell them politely where they went wrong move on to the next question}"},
                 {"role": "assistant", "content": "{You continue to ask some HR-type, some technical questiond related to their projects to the candidates who ask you to take an interview}"},
+                {"role": "user", "content":"{I am a {job role} and I am available for interview"},
+                {"role": "assistant", "content":"{You give 5 questions to the user at a go, the five questions should be framed such that there are 2 basic technical questions related to the domain, 1 HR-type question , 1 question for psychometric evaluation and 1 question for Adaptability and Learning Agility , So frame the questions and just provide the questions not the category}"}, 
+                {"role": "user", "content":"{User gives answer to the 5 questions}"},
+                {"role": "assistant", "content":"{Now you evaluate those answers on the basis of correctness quality and different metrics which a company looks for in a candidate , please be very careful of AI generated anwers and score the candidate on 10 once for overall performance , be a little vigilant in scoring and give the score on the basis if qulaity of the answers which the user has provided.Always encourage them, along with the score also provide the information that if the score is more than 6 then they are selected for the next phase and give them this link 'https://www.waysaheadglobal.com/careers.html' and tell them to click on the provided link and then find their appropriate job roles and then click apply now and then fill all the details and upload their updated resume. If the score is less than 6 then tell them the score and alsotell them where they went wrong and encourage them }"},
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
@@ -378,15 +382,16 @@ def extract_tags(text):
     'ThoughtLeadership': ['thought leadership', 'industry insights', 'research publications'],
     'Job': ['Job', 'developer', 'looking for a job'],
     'JobOpportunity': ['Job opportunity in Waysahead' , 'Career' , 'Salary'],
+    'interview':['interview' , 'score'],
     'DigitalMarketingSpecialist': ['digital marketing', 'marketing specialist'],
-    'ASPNetCoreFullStackDeveloper': ['ASP.Net Core', 'full stack developer'],
-    'FrontEndDeveloper': ['front end developer', 'web development'],
-    'MernFullStackDeveloper': ['MERN stack', 'full stack developer'],
-    'PhpLaravelDeveloper': ['PHP', 'Laravel', 'backend development'],
-    'PythonDeveloper': ['Python', 'software development'],
-    'TechTeamLead': ['tech team lead', 'leadership'],
-    'TechnicalContentWriter': ['technical content', 'content writer'],
-    'UIUXDesigner': ['UI/UX design', 'user experience', 'user interface'],
+    'DigitalMarketingSpecialist': ['SEO', 'SEM', 'social media marketing', 'Google ads', 'analytics', 'reporting', 'digital marketing', 'marketing specialist'],
+    'ASPNetCoreFullStackDeveloper': ['ASP.Net Core', 'Web API', 'full stack developer', 'MSSQL', 'Azure Functions', 'C# .NET', 'HTML5', 'CSS3', 'REST APIs', 'RPC APIs'],
+    'FrontEndDeveloper': ['HTML5', 'CSS3', 'JavaScript', 'React', 'Angular', 'Vue.js', 'Git', 'front end developer', 'web development'],
+    'MernFullStackDeveloper': ['React', 'MongoDB', 'Node.js', 'NoSQL', 'MERN stack', 'full stack developer'],
+    'PhpLaravelDeveloper': ['PHP', 'Laravel developer', 'SQL databases', 'RESTful API development', 'RDBMS', 'Front end', 'MIS', 'Postgre', 'MySQL', 'JavaScript'],
+    'PythonDeveloper': ['Python', 'code optimization', 'Git', 'CI/CD pipelines', 'software development'],
+    'TechTeamLead': ['Agile Scrum Methodology', 'Systems Engineering Concepts', 'Technical Leadership', 'Client Interaction', 'Relationship Management', 'tech team lead', 'leadership'],
+    'TechnicalContentWriter': ['troubleshooting techniques', 'version management tools', 'content designing principles', 'content editing', 'proofreading', 'SEO principles', 'keyword research', 'technical content', 'content writer'],
     }
     for pattern_tag, keywords in tag_keywords.items():
         if any(keyword.lower() in text.lower() for keyword in keywords):
