@@ -258,65 +258,71 @@ def fetch_session_id_from_database(session_id):
         conn.close()
         
 def Waysahead_bot():
-    conversation_history = []
-    sentiment_scores = []
-    tag = []
-    chat_counter = 0
-    c=0   
-    def chatbot(user_input,session):
-        nonlocal conversation_history
+    conversation_histories = {}
+    sentiment_scores = {}
+    tags = {}
+    chat_counter = {}
+    c=0
+    
+    def chatbot(user_input, session):
+        nonlocal conversation_histories
         nonlocal sentiment_scores
         nonlocal chat_counter
-        nonlocal tag
-        nonlocal c       
-        user_input_processed = preprocess_text(user_input)        
-        fetched_data = fetch_session_id_from_database(session) 
-        if not fetched_data:
-            sentiment_scores = []
-            conversation_history = []
-            tag=[]
-            c=0
-        tags = tag.append(extract_tags(user_input))
+        nonlocal tags
+        nonlocal c
+        user_input_processed = preprocess_text(user_input)
+        if session not in conversation_histories:
+            conversation_histories[session] = []
+            sentiment_scores[session] = []
+            chat_counter[session] = 0
+            tags[session] = []
+        tags[session].append(extract_tags(user_input))
         sentiment = get_sentiment_score(user_input)
-        sentiment_scores.append(sentiment)
-        average_sentiment = sum(sentiment_scores) / len(sentiment_scores)
-        conversation_history.append({"role": "user", "content": user_input})       
+        sentiment_scores[session].append(sentiment)
+        average_sentiment = sum(sentiment_scores[session]) / len(sentiment_scores[session])
+        conversation_histories[session].append({"role": "user", "content": user_input})
+
         name = extract_name(user_input)
         email = isemail(user_input)
-        phone = extract_phone_number(user_input)  
-        if email is True:
+        phone = extract_phone_number(user_input)
+
+        if email:
             c=1
-            response="Thank you for providing your email, if you have anymore questions feel free to ask!"
-            conversation_history.append({"role": "assistant", "content": response})
+            response = "Thank you for providing your email, if you have any more questions, feel free to ask!"
+            conversation_histories[session].append({"role": "assistant", "content": response})
             user_info_conn, user_info_cursor = get_user_info_database_connection()
-            store_user_information(user_info_cursor, name, extract_email(user_input), phone, average_sentiment, tag,session)        
+            store_user_information(user_info_cursor, name, extract_email(user_input), phone, average_sentiment,
+                                   tags[session], session)
             user_info_cursor.close()
             user_info_conn.close()
             return response
-        if c==0 and email is False:
+        if c==0 and not email:
             if phone:
-                response="Thank you for providing your phone number, Our team will get in touch with you shortly."
-                return response            
-            response = gpt(user_input_processed, conversation_history)            
-            conversation_history.append({"role": "assistant", "content": response})
-            chat_counter += 1
-            if chat_counter % 3 == 0:
-                    response += "\n\nCould you please provide your email for better assistance?"
-            store_chat(response,user_input,session)
-            return response         
+                response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
+                return response
+            response = gpt(user_input_processed, conversation_histories[session])
+            conversation_histories[session].append({"role": "assistant", "content": response})
+            chat_counter[session] += 1
+
+            if chat_counter[session] % 2 == 0:
+                response += "\n\nCould you please provide your email for better assistance?"
+            store_chat(response, user_input, session)
+            return response
         else:
             if phone:
-                response="Thank you for providing your phone number, Our team will get in touch with you shortly."
-                conversation_history.append({"role": "assistant", "content": response})
-                return response 
+                response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
+                conversation_histories[session].append({"role": "assistant", "content": response})
+                return response
             user_info_conn, user_info_cursor = get_user_info_database_connection()
-            update_user_information(user_info_cursor, session, average_sentiment, tag)
-            response = gpt(user_input, conversation_history)
-            conversation_history.append({"role": "assistant", "content": response})
-            chat_counter += 1
-            store_chat(response,user_input,session)
+            update_user_information(user_info_cursor, session, average_sentiment, tags[session])
+            response = gpt(user_input, conversation_histories[session])
+            conversation_histories[session].append({"role": "assistant", "content": response})
+            chat_counter[session] += 1
+            store_chat(response, user_input, session)
             return response
+
     return chatbot
+
 def extract_tags(text):
     tags = []
     tag_keywords = {
