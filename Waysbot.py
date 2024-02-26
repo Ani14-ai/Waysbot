@@ -256,7 +256,24 @@ def fetch_session_id_from_database(session_id):
     finally:
         cursor.close()
         conn.close()
+
+def add_lumi_score(session_id, lumi_score):
+        connection = pyodbc.connect(db_connection_string)
+        cursor = connection.cursor()
+        update_query = f"UPDATE tb_Ways_chat SET Lumi_score = ? WHERE session_id = ?"
+        cursor.execute(update_query, (lumi_score, session_id))
+        connection.commit()
+        cursor.close()
+        connection.close()
         
+def extract_and_save_rating(response):
+    rating_pattern = r'\b(\d+(\.\d+)?)/10\b'
+    rating_match = re.search(rating_pattern, response)
+    
+    if rating_match:
+        overall_rating = float(rating_match.group(1))
+        return overall_rating
+
 def Waysahead_bot():
     conversation_histories = {}
     sentiment_scores = {}
@@ -270,6 +287,7 @@ def Waysahead_bot():
         nonlocal tags
         nonlocal c
         user_input_processed = preprocess_text(user_input)
+
         if session not in conversation_histories:
             conversation_histories[session] = []
             sentiment_scores[session] = []
@@ -301,6 +319,9 @@ def Waysahead_bot():
                 response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
                 return response
             response = gpt(user_input_processed, conversation_histories[session])
+            score=extract_and_save_rating(response)
+            if score:
+                add_lumi_score(session, score)
             conversation_histories[session].append({"role": "assistant", "content": response})
             chat_counter[session] += 1
 
@@ -316,13 +337,14 @@ def Waysahead_bot():
             user_info_conn, user_info_cursor = get_user_info_database_connection()
             update_user_information(user_info_cursor, session, average_sentiment, tags[session])
             response = gpt(user_input, conversation_histories[session])
+            score=extract_and_save_rating(response)
+            if score:
+                add_lumi_score(session, score)
             conversation_histories[session].append({"role": "assistant", "content": response})
             chat_counter[session] += 1
             store_chat(response, user_input, session)
             return response
-
     return chatbot
-
 def extract_tags(text):
     tags = []
     tag_keywords = {
