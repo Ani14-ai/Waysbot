@@ -262,8 +262,7 @@ def Waysahead_bot():
     sentiment_scores = {}
     tags = {}
     chat_counter = {}
-    c=0
-    
+    c=0    
     def chatbot(user_input, session):
         nonlocal conversation_histories
         nonlocal sentiment_scores
@@ -276,6 +275,7 @@ def Waysahead_bot():
             sentiment_scores[session] = []
             chat_counter[session] = 0
             tags[session] = []
+            c=0
         tags[session].append(extract_tags(user_input))
         sentiment = get_sentiment_score(user_input)
         sentiment_scores[session].append(sentiment)
