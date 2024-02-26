@@ -23,7 +23,7 @@ window.onload = () => {
     } else {
         document.getElementById('chat-header-renoswift').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
-        introduceChatbot("Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things.\n Alternatively, if you're interested to take up a job with us, please let me know!");
+        introduceChatbot("Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things.\n Alternatively, If you want me to take your interview just ask! But please provide your mail id first so I can remember you.");
     }
 
     if (bot.get('bot') === "renoswift" || bot.get('bot') === "kalaa") {
@@ -203,7 +203,7 @@ let isSpeaking = false;
 
 function speakChatbotIntroduction() {
     // Speak the initial chatbot introduction
-    let introductionMessage = "Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things. Alternatively, if you're interested to take up a job with us, please let me know!";
+    let introductionMessage = "Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things.  Alternatively, If you want me to take your interview just ask! But please provide your mail id first so I can remember you.";
 
     if (chatBot === "renoswift") {
         introductionMessage = "Hello! I am RenoSwift Bot and I am here to help you reinvent your bathroom. I can help you with bathroom design ideas, product recommendations, and much more. Let's get started!";
