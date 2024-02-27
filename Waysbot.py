@@ -279,13 +279,15 @@ def Waysahead_bot():
     sentiment_scores = {}
     tags = {}
     chat_counter = {}
-    c=0    
+    c=0
+    score=0
     def chatbot(user_input, session):
         nonlocal conversation_histories
         nonlocal sentiment_scores
         nonlocal chat_counter
         nonlocal tags
         nonlocal c
+        nonlocal score
         user_input_processed = preprocess_text(user_input)
 
         if session not in conversation_histories:
@@ -293,6 +295,7 @@ def Waysahead_bot():
             sentiment_scores[session] = []
             chat_counter[session] = 0
             tags[session] = []
+            score=0
             c=0
         tags[session].append(extract_tags(user_input))
         sentiment = get_sentiment_score(user_input)
@@ -310,7 +313,7 @@ def Waysahead_bot():
             conversation_histories[session].append({"role": "assistant", "content": response})
             user_info_conn, user_info_cursor = get_user_info_database_connection()
             store_user_information(user_info_cursor, name, extract_email(user_input), phone, average_sentiment,
-                                   tags[session], session)
+                                   tags[session], session,score)
             user_info_cursor.close()
             user_info_conn.close()
             return response
@@ -321,7 +324,7 @@ def Waysahead_bot():
             response = gpt(user_input_processed, conversation_histories[session])
             score=extract_and_save_rating(response)
             if score:
-                add_lumi_score(session, score)
+                add_lumi_score(session, score)            
             conversation_histories[session].append({"role": "assistant", "content": response})
             chat_counter[session] += 1
 
@@ -344,7 +347,9 @@ def Waysahead_bot():
             chat_counter[session] += 1
             store_chat(response, user_input, session)
             return response
+
     return chatbot
+
 def extract_tags(text):
     tags = []
     tag_keywords = {
@@ -470,7 +475,7 @@ def store_chat(response,user,session_id):
         user_info_conn.commit()
         user_info_conn.close()
         
-def store_user_information(cursor, name, email, phone, average_sentiment, tags,session_id):
+def store_user_information(cursor, name, email, phone, average_sentiment, tags,session_id,score):
     duration = generate_otp()
     flattened_list = [tag for sublist in tags for tag in sublist]
     tags_str = ', '.join(flattened_list)    
@@ -486,9 +491,9 @@ def store_user_information(cursor, name, email, phone, average_sentiment, tags,s
     probability = raw_probability / max_possible_value    
     current_datetime = datetime.utcnow()
     formatted_date = current_datetime.strftime("%Y-%m-%d %H:%M:%S")    
-    cursor.execute('''INSERT INTO tb_Ways_chat (name, email, phone, sentiment, probability, tags, Date, duration, session_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (name, email, phone, average_sentiment, probability, tags_str, formatted_date, duration, session_id))
+    cursor.execute('''INSERT INTO tb_Ways_chat (name, email, phone, sentiment, probability, tags, Date, duration, session_id,Lumi_score)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+    ''', (name, email, phone, average_sentiment, probability, tags_str, formatted_date, duration, session_id,score))
     cursor.commit()
 
 
