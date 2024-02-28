@@ -21,6 +21,7 @@ import os
 import speech_recognition as sr
 import kalaaplanet
 import Renoswift
+import rewpaz
 load_dotenv()
 client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
@@ -58,7 +59,7 @@ def gpt(prompt,conversation_history):
          max_tokens=250,
          stream=True,
          messages=[
-                {"role": "system", "content": "You are a helpful assistant, named LUMI G24R , for WaysAhead Global.You are a part of the waysahead family so you always talk in first person and you are still being trained and You provide complete and comprehensive answers to customers, demonstrating extensive knowledge about the company and its digital transformation services. Your responses are precise, within 250 tokens, sensible, and delivered in a friendly manner. You engage in conversations with the customers and cover all aspects of WaysAhead Global's offerings."},
+                {"role": "system", "content": "You are a helpful assistant, named LUMI G24R , for WaysAhead Global.You are a part of the waysahead family so you always talk in first person and you are still being trained and You provide complete and comprehensive answers to customers, demonstrating extensive knowledge about the company and its digital transformation services. You also have the capability to take Technical interviews of potential candidates for the company. Conduct a thorough and friendly interview with potential candidates, showcasing the company culture and opportunities. Ensure you cover aspects of their skills, experiences, and alignment with WaysAhead's values. Remember, your goal is to discover the best talent for our dynamic team. . Your responses are precise, within 250 tokens, sensible, and delivered in a friendly manner. You engage in conversations with the customers and cover all aspects of WaysAhead Global's offerings."},
                 {"role": "user", "content": "What services does WaysAhead Global offer in digital transformation?"},
                 {"role": "assistant", "content": "- Digital Transformation Services: WaysAhead Global specializes in digital transformation, leveraging data analytics and AI to propel startups and tech companies globally towards unprecedented growth."},
                 {"role": "user", "content": "Tell me about the pillars of evolution at WaysAhead Global."},
@@ -178,6 +179,24 @@ def gpt(prompt,conversation_history):
                 {"role": "assistant", "content": "WaysAhead's transformational journey encompasses embracing Web 3.0 concepts like metaverse and blockchain. We focus on sustainability, providing carbon credits. From analyzing clients' data to ensuring data quality, we've evolved from Web 1 to Web 3, staying at the forefront of technological advancements. Our team is dedicated to redefining the digital landscape with innovative and sustainable practices."},
                 {"role": "user", "content": "How does WaysAhead ensure a secure and private data governance process?"},
                 {"role": "assistant", "content": "We prioritize a secure and private data governance process through a meticulous three-step procedure: identifying use cases, quantifying values, and developing a scalable delivery model. Our focus on data quality rules—validation, accuracy, completeness, and integrity—ensures a robust foundation. We're dedicated to safeguarding your data, adhering to the highest standards of security and privacy."},
+                {"role": "user", "content": "What kind of job roles does WaysAhead offer?"},
+                {"role": "assistant", "content": "WaysAhead offers a diverse range of job roles, catering to various expertise. Here are some of the roles available:\n\n1. Digital Marketing Specialist\n2. ASP.Net Core Full Stack Developer\n3. Front End Developer\n4. Mern Full Stack Developer\n5. Php Laravel Developer\n6. Python Developer\n7. Tech Team Lead\n8. Technical Content Writer\n9. UI UX Designer"},
+                {"role": "user", "content": "I want to get a job at waysahead"},
+                {"role": "assistant", "content": "Oh that's Great what role are you interested in ?"},
+                {"role": "user", "content": "I want to get a job at waysahead"},
+                {"role": "assistant", "content": "Oh that's Great what role are you interested in ?"},
+                {"role": "user", "content": "{User tells what job role he is interested in}"},
+                {"role": "assistant", "content": "{You start asking the user about his projects and experience}"},
+                {"role": "user", "content":"{User tells about all his/her projects}"},
+                {"role": "assistant", "content":"{You ask the some technical questions related to their projects}"},
+                {"role": "user", "content":"{User gives answer to those questions}"},
+                {"role": "assistant", "content":"{Like this you keep on asking potential candidates some technical questions and some related to whatever projects they have made to test their knoweledge on their respective programming language and skill set and assess them.}"},
+                {"role": "user", "content":"{User gives a wrong answer, tell them politely where they went wrong move on to the next question}"},
+                {"role": "assistant", "content": "{You continue to ask some HR-type, some technical questiond related to their projects to the candidates who ask you to take an interview}"},
+                {"role": "user", "content":"{I am a {job role} and I am available for interview"},
+                {"role": "assistant", "content":"{Given that the user has given a job role,If not then ask for it,You give 5 questions to the user at a go, the five questions should be framed such that there are 2 basic technical questions related to the domain, 1 HR-type question , 1 question for psychometric evaluation and 1 question for Adaptability and Learning Agility , So frame the questions and provide just the questions, and not the question category.Note that you do not provide anymore questions if you have already provided once.Each user is allowed only one set of questions.}"}, 
+                {"role": "user", "content":"{User gives answer to the 5 questions}"},
+                {"role": "assistant", "content":"{ It's crucial to ensure that the candidate has answered all five questions for the evaluation to proceed.Now you evaluate those answers on the basis of correctness, quality and different metrics which a company looks for in a candidate , Analyze the provided answer to determine whether it was human-written or generated with the assistance of the internet. Consider factors such as coherence, complexity, language proficiency, and potential signs of copying or plagiarism. Provide a detailed assessment of the response, highlighting any indicators that suggest human composition or reliance on online sources and score the candidate on 10 for overall performance,show the score in /10 format , be a little vigilant in scoring and give the score on the basis of qulaity of the answers which the candidate has provided, show the candidates only their final score .Always encourage them, along with the score also provide the information that if the score is more than 6 then they are selected for the next phase and give them this link 'https://www.waysaheadglobal.com/careers.html' and tell them to click on the provided link and then find their appropriate job roles and then click apply now and then fill all the details and upload their updated resume. If the score is less than 6 then tell them the score and also tell them where they went wrong and encourage them. }"},
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
@@ -238,65 +257,100 @@ def fetch_session_id_from_database(session_id):
     finally:
         cursor.close()
         conn.close()
+
+def add_lumi_score(session_id, lumi_score):
+        connection = pyodbc.connect(db_connection_string)
+        cursor = connection.cursor()
+        update_query = f"UPDATE tb_Ways_chat SET Lumi_score = ? WHERE session_id = ?"
+        cursor.execute(update_query, (lumi_score, session_id))
+        connection.commit()
+        cursor.close()
+        connection.close()
         
+def extract_and_save_rating(response):
+    rating_pattern = r'\b(\d+(\.\d+)?)/10\b'
+    rating_match = re.search(rating_pattern, response)
+    
+    if rating_match:
+        overall_rating = float(rating_match.group(1))
+        return overall_rating
+
 def Waysahead_bot():
-    conversation_history = []
-    sentiment_scores = []
-    tag = []
-    chat_counter = 0
-    c=0   
-    def chatbot(user_input,session):
-        nonlocal conversation_history
+    conversation_histories = {}
+    sentiment_scores = {}
+    tags = {}
+    chat_counter = {}
+    c=0
+    score=0
+    def chatbot(user_input, session):
+        nonlocal conversation_histories
         nonlocal sentiment_scores
         nonlocal chat_counter
-        nonlocal tag
-        nonlocal c       
-        user_input_processed = preprocess_text(user_input)        
-        fetched_data = fetch_session_id_from_database(session) 
-        if not fetched_data:
-            sentiment_scores = []
-            conversation_history = []
-            tag=[]
+        nonlocal tags
+        nonlocal c
+        nonlocal score
+        user_input_processed = preprocess_text(user_input)
+
+        if session not in conversation_histories:
+            conversation_histories[session] = []
+            sentiment_scores[session] = []
+            chat_counter[session] = 0
+            tags[session] = []
+            score=0
             c=0
-        tags = tag.append(extract_tags(user_input))
+        tags[session].append(extract_tags(user_input))
         sentiment = get_sentiment_score(user_input)
-        sentiment_scores.append(sentiment)
-        average_sentiment = sum(sentiment_scores) / len(sentiment_scores)
-        conversation_history.append({"role": "user", "content": user_input})       
+        sentiment_scores[session].append(sentiment)
+        average_sentiment = sum(sentiment_scores[session]) / len(sentiment_scores[session])
+        conversation_histories[session].append({"role": "user", "content": user_input})
+
         name = extract_name(user_input)
         email = isemail(user_input)
-        phone = extract_phone_number(user_input)  
-        if email is True:
+        phone = extract_phone_number(user_input)
+
+        if email:
             c=1
-            response="Thank you for providing your email, if you have anymore questions feel free to ask!"
-            conversation_history.append({"role": "assistant", "content": response})
+            response = "Thank you for providing your email, if you have any more questions, feel free to ask!"
+            conversation_histories[session].append({"role": "assistant", "content": response})
             user_info_conn, user_info_cursor = get_user_info_database_connection()
-            store_user_information(user_info_cursor, name, extract_email(user_input), phone, average_sentiment, tag,session)        
+            store_user_information(user_info_cursor, name, extract_email(user_input), phone, average_sentiment,
+                                   tags[session], session,score)
             user_info_cursor.close()
             user_info_conn.close()
             return response
-        if c==0 and email is False:
+        if c==0 and not email:
             if phone:
-                response="Thank you for providing your phone number, Our team will get in touch with you shortly."
-                return response            
-            response = gpt(user_input_processed, conversation_history)            
-            conversation_history.append({"role": "assistant", "content": response})
-            chat_counter += 1
-            if chat_counter % 3 == 0:
-                    response += "\n\nCould you please provide your email for better assistance?"
-            store_chat(response,user_input,session)
-            return response         
+                response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
+                return response
+            response = gpt(user_input_processed, conversation_histories[session])
+            score=extract_and_save_rating(response)
+            if score:
+                add_lumi_score(session, score)            
+            conversation_histories[session].append({"role": "assistant", "content": response})
+            chat_counter[session] += 1
+
+            if chat_counter[session] % 2 == 0:
+                response += "\n\n As you have not provided your email , it is not possible for me to remember you. Please provide your email so I can help you better."
+            store_chat(response, user_input, session)
+            return response
         else:
             if phone:
-                response="Thank you for providing your phone number, Our team will get in touch with you shortly."
-                conversation_history.append({"role": "assistant", "content": response})
-                return response 
-            response = gpt(user_input, conversation_history)
-            conversation_history.append({"role": "assistant", "content": response})
-            chat_counter += 1
-            store_chat(response,user_input,session)
+                response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
+                conversation_histories[session].append({"role": "assistant", "content": response})
+                return response
+            user_info_conn, user_info_cursor = get_user_info_database_connection()
+            update_user_information(user_info_cursor, session, average_sentiment, tags[session])
+            response = gpt(user_input, conversation_histories[session])
+            score=extract_and_save_rating(response)
+            if score:
+                add_lumi_score(session, score)
+            conversation_histories[session].append({"role": "assistant", "content": response})
+            chat_counter[session] += 1
+            store_chat(response, user_input, session)
             return response
+
     return chatbot
+
 def extract_tags(text):
     tags = []
     tag_keywords = {
@@ -360,11 +414,52 @@ def extract_tags(text):
     'TrainingDevelopment': ['training and development', 'employee education', 'skill enhancement'],
     'QualityAssurance': ['quality assurance', 'certifications', 'compliance standards'],
     'ThoughtLeadership': ['thought leadership', 'industry insights', 'research publications'],
+    'Job': ['Job', 'developer', 'looking for a job'],
+    'JobOpportunity': ['Job opportunity in Waysahead' , 'Career' , 'Salary'],
+    'interview':['interview' , 'score'],
+    'DigitalMarketingSpecialist': ['digital marketing', 'marketing specialist'],
+    'DigitalMarketingSpecialist': ['SEO', 'SEM', 'social media marketing', 'Google ads', 'analytics', 'reporting', 'digital marketing', 'marketing specialist'],
+    'ASPNetCoreFullStackDeveloper': ['ASP.Net Core', 'Web API', 'full stack developer', 'MSSQL', 'Azure Functions', 'C# .NET', 'HTML5', 'CSS3', 'REST APIs', 'RPC APIs'],
+    'FrontEndDeveloper': ['HTML5', 'CSS3', 'JavaScript', 'React', 'Angular', 'Vue.js', 'Git', 'front end developer', 'web development'],
+    'MernFullStackDeveloper': ['React', 'MongoDB', 'Node.js', 'NoSQL', 'MERN stack', 'full stack developer'],
+    'PhpLaravelDeveloper': ['PHP', 'Laravel developer', 'SQL databases', 'RESTful API development', 'RDBMS', 'Front end', 'MIS', 'Postgre', 'MySQL', 'JavaScript'],
+    'PythonDeveloper': ['Python', 'code optimization', 'Git', 'CI/CD pipelines', 'software development'],
+    'TechTeamLead': ['Agile Scrum Methodology', 'Systems Engineering Concepts', 'Technical Leadership', 'Client Interaction', 'Relationship Management', 'tech team lead', 'leadership'],
+    'TechnicalContentWriter': ['troubleshooting techniques', 'version management tools', 'content designing principles', 'content editing', 'proofreading', 'SEO principles', 'keyword research', 'technical content', 'content writer'],
     }
     for pattern_tag, keywords in tag_keywords.items():
         if any(keyword.lower() in text.lower() for keyword in keywords):
             tags.append(pattern_tag)
     return tags
+
+def update_user_information(cursor, session_id, new_sentiment, new_tags):
+    flattened_list = [tag for sublist in new_tags for tag in sublist]
+    tags_str = ', '.join(flattened_list)
+    
+    adjusted_sentiment = (new_sentiment + 1) / 2
+    base_probability = len(flattened_list) * 0.1
+    
+    if base_probability == 0:
+        base_probability = 1
+    
+    sentiment_factor = max(adjusted_sentiment, 0.1)
+    raw_probability = base_probability * sentiment_factor
+    max_possible_value = len(flattened_list) * 0.1
+    
+    if max_possible_value == 0:
+        max_possible_value = 1
+    
+    probability = raw_probability / max_possible_value
+    
+    cursor.execute('''
+        UPDATE tb_Ways_chat
+        SET sentiment = ?,
+            probability = ?,
+            tags = ?
+        WHERE session_id = ?
+    ''', (new_sentiment, probability, tags_str, session_id))
+    
+    cursor.commit()
 
 def get_user_info_database_connection():
     user_info_conn = pyodbc.connect(db_connection_string)
@@ -381,7 +476,7 @@ def store_chat(response,user,session_id):
         user_info_conn.commit()
         user_info_conn.close()
         
-def store_user_information(cursor, name, email, phone, average_sentiment, tags,session_id):
+def store_user_information(cursor, name, email, phone, average_sentiment, tags,session_id,score):
     duration = generate_otp()
     flattened_list = [tag for sublist in tags for tag in sublist]
     tags_str = ', '.join(flattened_list)    
@@ -397,9 +492,9 @@ def store_user_information(cursor, name, email, phone, average_sentiment, tags,s
     probability = raw_probability / max_possible_value    
     current_datetime = datetime.utcnow()
     formatted_date = current_datetime.strftime("%Y-%m-%d %H:%M:%S")    
-    cursor.execute('''INSERT INTO tb_Ways_chat (name, email, phone, sentiment, probability, tags, Date, duration, session_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (name, email, phone, average_sentiment, probability, tags_str, formatted_date, duration, session_id))
+    cursor.execute('''INSERT INTO tb_Ways_chat (name, email, phone, sentiment, probability, tags, Date, duration, session_id,Lumi_score)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+    ''', (name, email, phone, average_sentiment, probability, tags_str, formatted_date, duration, session_id,score))
     cursor.commit()
 
 
@@ -485,6 +580,34 @@ def chat_renoswift():
     conn = pyodbc.connect(db_connection_string)
     cursor = conn.cursor()
     query = """UPDATE Renochat_hist 
+               SET response_time = ?  
+               WHERE session_id = ?"""
+    cursor.execute(query,time_taken,session)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return jsonify({'response': response})
+
+chatbot_model3= Rewpaz_bot()
+@app.route('/api/Waysbot/chat/rewpaz', methods=['POST'])
+def chat_renoswift():
+    global conversation_history
+    global session_start_time
+    start_time = time.time()
+    session=request.headers["session-id"]
+    user_input = request.json.get('user_input')
+    if user_input.lower() in ['bye', 'exit', 'quit']:
+        response = "Goodbye!"
+        conversation_history = []
+    elif user_input.lower() in ['hi', 'hello', 'hey']:
+        response = "Hello! How can I assist you today?"
+    else:
+        response = chatbot_model3(user_input,session)
+    end_time = time.time()
+    time_taken = (end_time - start_time)
+    conn = pyodbc.connect(db_connection_string)
+    cursor = conn.cursor()
+    query = """UPDATE Rewpaz_chat_hist 
                SET response_time = ?  
                WHERE session_id = ?"""
     cursor.execute(query,time_taken,session)
