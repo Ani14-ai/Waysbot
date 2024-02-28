@@ -590,7 +590,7 @@ def chat_renoswift():
 
 chatbot_model3= rewpaz.Rewpaz_bot()
 @app.route('/api/Waysbot/chat/rewpaz', methods=['POST'])
-def chat_renoswift():
+def chat_rewpaz():
     global conversation_history
     global session_start_time
     start_time = time.time()
