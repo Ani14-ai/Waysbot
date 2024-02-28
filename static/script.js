@@ -221,7 +221,7 @@ function speakChatbotIntroduction() {
         introductionMessage = "Hello! I am Kalaa Planet Bot and I am here to take you on an artistic journey. Come and explore the world of Kalaa Planet with me. I will be happy to be your guide.";
     }
 
-    if (chatbot === "rewpaz") {
+    if (chatBot === "rewpaz") {
         introductionMessage = "Hi I am a virtual assistant for Rewpaz , If you have any queries regarding Rewpaz , its services and mental health , feel free to ask! I am here to support you every step of the way";    
     }
 
