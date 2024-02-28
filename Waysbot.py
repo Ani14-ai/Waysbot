@@ -329,7 +329,7 @@ def Waysahead_bot():
             chat_counter[session] += 1
 
             if chat_counter[session] % 2 == 0:
-                response += "\n\nCould you please provide your email for better assistance?"
+                response += "\n\n As you have not provided your email , it is not possible for me to remember you. Please provide your email so I can help you better."
             store_chat(response, user_input, session)
             return response
         else:
