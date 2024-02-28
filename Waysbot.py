@@ -588,7 +588,7 @@ def chat_renoswift():
     conn.close()
     return jsonify({'response': response})
 
-chatbot_model3= Rewpaz_bot()
+chatbot_model3= rewpaz.Rewpaz_bot()
 @app.route('/api/Waysbot/chat/rewpaz', methods=['POST'])
 def chat_renoswift():
     global conversation_history
