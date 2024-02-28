@@ -21,6 +21,7 @@ import os
 import speech_recognition as sr
 import kalaaplanet
 import Renoswift
+import rewpaz
 load_dotenv()
 client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
@@ -579,6 +580,34 @@ def chat_renoswift():
     conn = pyodbc.connect(db_connection_string)
     cursor = conn.cursor()
     query = """UPDATE Renochat_hist 
+               SET response_time = ?  
+               WHERE session_id = ?"""
+    cursor.execute(query,time_taken,session)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return jsonify({'response': response})
+
+chatbot_model3= Rewpaz_bot()
+@app.route('/api/Waysbot/chat/rewpaz', methods=['POST'])
+def chat_renoswift():
+    global conversation_history
+    global session_start_time
+    start_time = time.time()
+    session=request.headers["session-id"]
+    user_input = request.json.get('user_input')
+    if user_input.lower() in ['bye', 'exit', 'quit']:
+        response = "Goodbye!"
+        conversation_history = []
+    elif user_input.lower() in ['hi', 'hello', 'hey']:
+        response = "Hello! How can I assist you today?"
+    else:
+        response = chatbot_model3(user_input,session)
+    end_time = time.time()
+    time_taken = (end_time - start_time)
+    conn = pyodbc.connect(db_connection_string)
+    cursor = conn.cursor()
+    query = """UPDATE Rewpaz_chat_hist 
                SET response_time = ?  
                WHERE session_id = ?"""
     cursor.execute(query,time_taken,session)
