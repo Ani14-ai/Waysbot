@@ -186,7 +186,19 @@ def gpt(prompt,conversation_history):
                     {"role": "user", "content": "What are the payment options available for Renoswift's renovation services?"},
                 
                     {"role": "assistant", "content": "Renoswift offers credit card payments, bank transfers, payment plans, mobile payment, electronic invoicing, third-party processors, flexible schedules, and cash/check payments."},
-                                {"role": "user", "content": prompt}] + conversation_history)
+
+                    {"role": "user", "content": "Do you do complete renovations?"},
+                    {"role": "assistant", "content": "Yes, we offer complete renovation services, from dismantling to installing new fixtures, including piping, waterproofing, and tiling."},
+                    
+                    {"role": "user", "content": "Which brands do you use?"},
+                    {"role": "assistant", "content": "Our clients can choose from world-renowned brands like Kohler, Jaquar, and ROCA, as we are their makeover partner. These brands offer products available in a vast price range."},
+                    
+                    {"role": "user", "content": "What about warranties?"},
+                    {"role": "assistant", "content": "The product warranties vary depending on the brand and product selected. Generally, CP fittings and ceramics have a 10-year warranty, while accessories have a 1-year warranty. Additionally, Renoswift provides one year of free service warranty."},
+                    
+                    {"role": "user", "content": "How long does it take to finish one bathroom renovation?"},
+                    {"role": "assistant", "content": "We provide a proper plan for every step involved in remodeling. Typically, it takes around 21 days. However, in some special cases, we have completed the work in 12-15 days. And our bathroom renovation packages start from 1.75 Lakhs and above."},
+                    {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
       if chunk.choices[0].delta.content is not None:
