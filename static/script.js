@@ -12,29 +12,40 @@ window.onload = () => {
     generateSessionid();
     const bot = new URLSearchParams(window.location.search.split('?')[1]);
 
+   
     if (bot.get('bot') === "renoswift") {
         document.getElementById('chat-header-waysbot').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
         document.getElementById('chat-header-rewpaz').style.display = "none";
+	    document.getElementById('chat-header-righteous').style.display = "none";
         introduceChatbot("Hello! I am RenoSwift Bot and I am here to help you reinvent your bathroom. I can help you with bathroom design ideas, product recommendations, and much more. Let's get started!");
     } else if (bot.get('bot') === "kalaa") {
         document.getElementById('chat-header-waysbot').style.display = "none";
         document.getElementById('chat-header-renoswift').style.display = "none";
         document.getElementById('chat-header-rewpaz').style.display = "none";
+	    document.getElementById('chat-header-righteous').style.display = "none";
         introduceChatbot("Hello! I am Kalaa Planet Bot and I am here to take you on an artistic journey. Come and explore the world of Kalaa Planet with me. I will be happy to be your guide.");
     } else if (bot.get('bot') === "rewpaz") {
         document.getElementById('chat-header-waysbot').style.display = "none";
         document.getElementById('chat-header-renoswift').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
+        document.getElementById('chat-header-righteous').style.display = "none";
         introduceChatbot("Hi I am a virtual assistant for Rewpaz , If you have any queries regarding Rewpaz , its services and mental health , feel free to ask! I am here to support you every step of the way.");
+    } else if (bot.get('bot') === "righteous") {
+        document.getElementById('chat-header-waysbot').style.display = "none";
+        document.getElementById('chat-header-renoswift').style.display = "none";
+        document.getElementById('chat-header-kalaa').style.display = "none";
+	    document.getElementById('chat-header-rewpaz').style.display = "none";
+        introduceChatbot("Hello! I am an assistant for Righteous properties and I am here to guide you to find the home  of your dreams. Feel free to ask me anything.");
     } else {
         document.getElementById('chat-header-renoswift').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
         document.getElementById('chat-header-rewpaz').style.display = "none";
+    	document.getElementById('chat-header-righteous').style.display = "none";
         introduceChatbot("Hello! I'm LUMI G24R, WaysAhead Global's latest AI creation. I am here to assist you and learn new things.  Alternatively, If you want me to take your interview just ask! But please provide your mail id first so I can remember you.");
     }
 
-    if (bot.get('bot') === "renoswift" || bot.get('bot') === "kalaa" || bot.get('bot') === "rewpaz"){
+    if (bot.get('bot') === "renoswift" || bot.get('bot') === "kalaa" || bot.get('bot') === "rewpaz" || bot.get('bot') === "righteous"){
         chatBot = bot.get('bot');
         document.querySelector('html').classList.add(chatBot);
     }
@@ -223,6 +234,10 @@ function speakChatbotIntroduction() {
 
     if (chatBot === "rewpaz") {
         introductionMessage = "Hi I am a virtual assistant for Rewpaz , If you have any queries regarding Rewpaz , its services and mental health , feel free to ask! I am here to support you every step of the way";    
+    }
+
+    if (chatBot === "righteous") {
+        introductionMessage = "Hello! I am an assistant for Righteous properties and I am here to guide you to find the home  of your dreams. Feel free to ask me anything";    
     }
 
     speakMessage(introductionMessage);
