@@ -17,7 +17,7 @@ window.onload = () => {
         document.getElementById('chat-header-waysbot').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
         document.getElementById('chat-header-rewpaz').style.display = "none";
-	    document.getElementById('chat-header-righteous').style.display = "none";
+	document.getElementById('chat-header-righteous').style.display = "none";
         introduceChatbot("Hello! I am RenoSwift Bot and I am here to help you reinvent your bathroom. I can help you with bathroom design ideas, product recommendations, and much more. Let's get started!");
     } else if (bot.get('bot') === "kalaa") {
         document.getElementById('chat-header-waysbot').style.display = "none";
@@ -35,7 +35,7 @@ window.onload = () => {
         document.getElementById('chat-header-waysbot').style.display = "none";
         document.getElementById('chat-header-renoswift').style.display = "none";
         document.getElementById('chat-header-kalaa').style.display = "none";
-	    document.getElementById('chat-header-rewpaz').style.display = "none";
+	document.getElementById('chat-header-rewpaz').style.display = "none";
         introduceChatbot("Hello! I am an assistant for Righteous properties and I am here to guide you to find the home  of your dreams. Feel free to ask me anything.");
     } else {
         document.getElementById('chat-header-renoswift').style.display = "none";
@@ -138,7 +138,7 @@ async function sendMessage(sender, message) {
 
     let url = `https://testapi.unomiru.com/api/Waysbot/chat`;
 
-    if (chatBot === "renoswift" || chatBot === "kalaa" || chatBot === "rewpaz") {
+    if (chatBot === "renoswift" || chatBot === "kalaa" || chatBot === "rewpaz" || chatBot === "righteous") {
         url = `https://testapi.unomiru.com/api/Waysbot/chat/${chatBot}`;
     }
 
