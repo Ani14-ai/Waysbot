@@ -22,6 +22,7 @@ import speech_recognition as sr
 import kalaaplanet
 import Renoswift
 import rewpaz
+import rp
 load_dotenv()
 client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
