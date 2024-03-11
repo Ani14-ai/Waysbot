@@ -20,6 +20,11 @@
     --chat-background-color: rgba(0, 35, 35, 0.85);
 }
 
+:root.righteous{
+    --chat-heading-color: #db222a;
+    --chat-background-color: rgba(243, 180, 166, 0.878);
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
