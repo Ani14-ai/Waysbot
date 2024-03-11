@@ -622,6 +622,34 @@ def chat_rewpaz():
     conn.close()
     return jsonify({'response': response})
 
+chatbot_model4= rp.properties_bot()
+@app.route('/api/Waysbot/chat/righteous', methods=['POST'])
+def chat_righteous():
+    global conversation_history
+    global session_start_time
+    start_time = time.time()
+    session=request.headers["session-id"]
+    user_input = request.json.get('user_input')
+    if user_input.lower() in ['bye', 'exit', 'quit']:
+        response = "Goodbye!"
+        conversation_history = []
+    elif user_input.lower() in ['hi', 'hello', 'hey']:
+        response = "Hello! How can I assist you today?"
+    else:
+        response = chatbot_model4(user_input,session)
+    end_time = time.time()
+    time_taken = (end_time - start_time)
+    conn = pyodbc.connect(db_connection_string)
+    cursor = conn.cursor()
+    query = """UPDATE Righteouschat_hist 
+               SET response_time = ?  
+               WHERE session_id = ?"""
+    cursor.execute(query,time_taken,session)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return jsonify({'response': response})
+
 @app.route('/speech-to-text', methods=['POST'])
 def speech_to_text():
     try:
