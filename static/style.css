@@ -21,8 +21,8 @@
 }
 
 :root.righteous{
-    --chat-heading-color: #db222a;
-    --chat-background-color: rgba(243, 180, 166, 0.878);
+ --chat-heading-color: 	#000000;
+    --chat-background-color: rgba(255, 215, 0, 0.714);
 }
 
 body {
