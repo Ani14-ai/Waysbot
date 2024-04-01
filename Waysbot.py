@@ -654,7 +654,7 @@ def chat_righteous():
 
 chatbot_model5= ca.Waysahead_bot_ca()
 @app.route('/api/Waysbot/chat/ca', methods=['POST'])
-def chat():
+def chat_ca():
     global conversation_history
     global session_start_time
     start_time = time.time()
