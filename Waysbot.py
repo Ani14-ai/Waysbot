@@ -652,7 +652,7 @@ def chat_righteous():
     conn.close()
     return jsonify({'response': response})
 
-chatbot_model5= Waysahead_bot_ca()
+chatbot_model5= ca.Waysahead_bot_ca()
 @app.route('/api/Waysbot/chat/ca', methods=['POST'])
 def chat():
     global conversation_history
