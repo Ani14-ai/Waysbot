@@ -19,7 +19,7 @@ import time
 from dotenv import load_dotenv
 import os
 load_dotenv()
-client = OpenAI(api_key=os.getenv("openai_key_ca"))
+client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
 db_connection_string = (
     "Driver={ODBC Driver 17 for SQL Server};"
@@ -417,35 +417,3 @@ def store_user_information(cursor, name, email, phone, average_sentiment, tags,s
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', (name, email, phone, average_sentiment, probability, tags_str, formatted_date, duration, session_id))
     cursor.commit()
-
-
-
-chatbot_model= Waysahead_bot()
-@app.route('/api/Waysbot/chat/ca', methods=['POST'])
-def chat():
-    global conversation_history
-    global session_start_time
-    start_time = time.time()
-    session=request.headers["session-id"]
-    user_input = request.json.get('user_input')
-    if user_input.lower() in ['bye', 'exit', 'quit']:
-        response = "Goodbye!"
-        conversation_history = []
-    elif user_input.lower() in ['hi', 'hello', 'hey']:
-        response = "Hello! How can I assist you today?"
-    else:
-        response = chatbot_model(user_input,session)
-    end_time = time.time()
-    time_taken = (end_time - start_time)
-    conn = pyodbc.connect(db_connection_string)
-    cursor = conn.cursor()
-    query = """UPDATE Wayschat_hist_ca 
-               SET response_time = ?  
-               WHERE session_id = ?"""
-    cursor.execute(query,time_taken,session)
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return jsonify({'response': response})
-
-
