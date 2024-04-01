@@ -25,6 +25,11 @@
 --chat-background-color: rgba(0, 0, 0, 0.85);
 }
 
+:root.ca{
+--chat-heading-color: #250101;
+--chat-background-color: rgba(157, 0, 0, 0.85);
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
