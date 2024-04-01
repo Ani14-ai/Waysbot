@@ -220,7 +220,7 @@ def fetch_session_id_from_database(session_id):
         conn.close()
         
 
-def Waysahead_bot():
+def Waysahead_bot_ca():
     conversation_histories = {}
     sentiment_scores = {}
     tags = {}
