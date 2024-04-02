@@ -21,8 +21,8 @@
 }
 
 :root.righteous{ 
- --chat-heading-color: #090909cc;
-    --chat-background-color: rgba(145, 139, 139, 0.85);
+   --chat-heading-color: #d7d7d7cc;
+    --chat-background-color: rgba(0, 0, 0, 0.85);
 }
 
 :root.ca{
