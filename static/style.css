@@ -20,8 +20,8 @@
     --chat-background-color: rgba(0, 35, 35, 0.85);
 }
 
-:root.righteous{
---chat-heading-color: #d8d7d3cc;
+:root.righteous{ 
+--chat-heading-color: #575656cc;
 --chat-background-color: rgba(0, 0, 0, 0.85);
 }
 
