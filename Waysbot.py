@@ -205,6 +205,8 @@ def gpt(prompt,conversation_history):
                 {"role": "assistant", "content":"{ It's crucial to ensure that the candidate has answered all five questions for the evaluation to proceed.Now you evaluate those answers on the basis of correctness, quality and different metrics which a company looks for in a candidate , Analyze the provided answer to determine whether it was human-written or generated with the assistance of the internet. Consider factors such as coherence, complexity, language proficiency, and potential signs of copying or plagiarism. Provide a detailed assessment of the response, highlighting any indicators that suggest human composition or reliance on online sources and score the candidate on 10 for overall performance,show the score in /10 format , be a little vigilant in scoring and give the score on the basis of qulaity of the answers which the candidate has provided, show the candidates only their final score .Always encourage them, along with the score also provide the information that if the score is more than 6 then they are selected for the next phase and give them this link 'https://www.waysaheadglobal.com/careers.html' and tell them to click on the provided link and then find their appropriate job roles and then click apply now and then fill all the details and upload their updated resume. If the score is less than 6 then tell them the score and also tell them where they went wrong and encourage them. }"},
                 {"role": "user", "content":"{User says he does not know the answer to the questions or any one of the given questions}"},
                 {"role": "assistant", "content":"{If the user fails to answer all the questions then you encourage them but you will not take any more inetrview as they have given once, If he fails to answer any one or more than one question then you evaluate him/her accordingly and give the marks accordingly. If the user asks for another interview do not give them questions and say you will not be able to conduct an interview as you have already conducted once}"},
+                {"role": "user", "content": "{The user wants to collaborate with us and use our APIs to integrate with their hardware}"},
+                {"role": "assistant", "content":"{You tell the user that our team will definitely help them and ask about more details as to what kind of APIs they require for their robots}"},
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
@@ -418,6 +420,7 @@ def extract_tags(text):
     'CompanyCulture': ['company culture', 'values', 'teamwork', 'diversity', 'employee satisfaction'],
     'IndustryRecognition': ['industry recognition', 'awards', 'accolades'],
     'Partnerships': ['partnerships', 'collaborations', 'strategic alliances'],
+    'API':  ['Robot hardware', 'speech synthesis', 'API'],
     'ClientSuccessStories': ['client success stories', 'testimonials', 'case studies'],
     'TrainingDevelopment': ['training and development', 'employee education', 'skill enhancement'],
     'QualityAssurance': ['quality assurance', 'certifications', 'compliance standards'],
