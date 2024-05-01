@@ -29,7 +29,7 @@ client = OpenAI(api_key=os.getenv("openai_key"))
 nltk.download('averaged_perceptron_tagger')
 db_connection_string = (
     "Driver={ODBC Driver 17 for SQL Server};"
-    "Server=103.239.89.99;"
+    "Server=103.145.51.250;"
     "Database=PMO360_DB;"
     "UID=PMOlogbook_Usr;"
     "PWD=PMO_log360!x4;"
