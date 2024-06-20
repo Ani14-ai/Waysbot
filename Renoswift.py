@@ -25,7 +25,7 @@ db_connection_string = (
     "Server=103.239.89.99,21433;"
     "Database=PMO360_DB;"
     "UID=PMOlogbook_Usr;"
-    "PWD=PMO_log360!x4;"
+    "PWD=G9x^0n0t4;"
 )
 def preprocess_text(text):
     tokens = word_tokenize(text.lower())
