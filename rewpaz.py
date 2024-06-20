@@ -18,7 +18,7 @@ db_connection_string = (
     "Server=103.145.51.250;"
     "Database=PMO360_DB;"
     "UID=PMOlogbook_Usr;"
-    "PWD=PMO_log360!x4;"
+    "PWD=G9x^0n0t4;"
 )
 
 def gpt(prompt,conversation_history):
