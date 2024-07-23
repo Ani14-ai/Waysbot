@@ -325,7 +325,6 @@ def Waysahead_bot():
         name = extract_name(user_input)
         email = isemail(user_input)
         phone = extract_phone_number(user_input)
-
         if email:
             c=1
             response = "Thank you for providing your email, if you have any more questions, feel free to ask!"
@@ -346,11 +345,6 @@ def Waysahead_bot():
                 add_lumi_score(session, score)            
             conversation_histories[session].append({"role": "assistant", "content": response})
             chat_counter[session] += 1
-
-            if chat_counter[session] % 2 == 0:
-                response += "\n\n As you have not provided your email , it is not possible for me to remember you. Please provide your email so I can help you better."
-            store_chat(response, user_input, session)
-            return response
         else:
             if phone:
                 response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
