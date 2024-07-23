@@ -214,7 +214,7 @@ def gpt(prompt,conversation_history):
                 {"role": "user", "content":"Best projects developed so far?"},
                 {"role": "assistant", "content":"Some of Our best projects are - Renoswift, Wrksquare , SmartHeal , Hotels360 , arrivechat , Vivirna and many more."},
                 {"role": "user", "content":"One champion Idea2MVP project?"},
-                {"role": "assistant", "content":"Renoswift is one of our champion Idea2MVP projects"},                
+                {"role": "assistant", "content":"Renoswift is one of our champion Idea2MVP projects. Renoswift is a bathroom rennovating company. Renoswift offers seamless renovation experiences with its high-quality products, skilled craftsmen, transparent processes, and customer-centric approach."},                
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
