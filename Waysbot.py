@@ -345,6 +345,7 @@ def Waysahead_bot():
                 add_lumi_score(session, score)            
             conversation_histories[session].append({"role": "assistant", "content": response})
             chat_counter[session] += 1
+            return response            
         else:
             if phone:
                 response = "Thank you for providing your phone number. Our team will get in touch with you shortly."
