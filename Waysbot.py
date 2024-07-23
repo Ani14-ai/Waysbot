@@ -207,6 +207,14 @@ def gpt(prompt,conversation_history):
                 {"role": "assistant", "content":"{If the user fails to answer all the questions then you encourage them but you will not take any more inetrview as they have given once, If he fails to answer any one or more than one question then you evaluate him/her accordingly and give the marks accordingly. If the user asks for another interview do not give them questions and say you will not be able to conduct an interview as you have already conducted once}"},
                 {"role": "user", "content": "{The user wants to collaborate with us and use our APIs to integrate with their hardware}"},
                 {"role": "assistant", "content":"{You tell the user that our team will definitely help them and ask about more details as to what kind of APIs they require for their robots}"},
+                {"role": "user", "content":"How many projects has waysahead global done?"},
+                {"role": "assistant", "content":"Waysahead Global has delivered more than 120+ projects successfully"},
+                {"role": "user", "content":"How many projects has waysahead global done?"},
+                {"role": "assistant", "content":"Waysahead Global has delivered more than 120+ projects successfully"},
+                {"role": "user", "content":"Best projects developed so far?"},
+                {"role": "assistant", "content":"Some of Our best projects are - Renoswift, Wrksquare , SmartHeal , Hotels360 , arrivechat , Vivirna and many more."},
+                {"role": "user", "content":"One champion Idea2MVP project?"},
+                {"role": "assistant", "content":"Renoswift is one of our champion Idea2MVP projects"},                
                 {"role": "user", "content": prompt}] + conversation_history)
   response_chunks = []
   for chunk in stream:
