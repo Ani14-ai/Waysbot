@@ -55,7 +55,7 @@ def is_session_expired():
 
 def gpt(prompt,conversation_history):
   stream= client.chat.completions.create(
-         model="gpt-3.5-turbo-0125",
+         model="gpt-4o-mini-2024-07-18",
          response_format={"type": "text"},
          temperature=0.8,
          max_tokens=250,
