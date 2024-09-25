@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startup Visa Support</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&display=swap" rel="stylesheet">
+
 </head>
 
 <body style="background-color: transparent;">
@@ -118,11 +121,23 @@
         </div>
     </div>
 
-    <div id="chatbot-icon" onclick="toggleChatbot()" data-tooltip="Click here for assistance">
-        <img style="width: 80px; height: 80px;" src="../static/bot-gif.gif" alt="Chatbot Icon">
+    <div id="chatbot-icon" onclick="toggleChatbot()" data-aos="zoom-in" data-aos-duration="1500">
+        <img style="width: 80px; height: 80px;" src="../static/bot-gif.gif" alt="Chatbot Icon" class="chatbot-image">
+        <div class="message">
+            Hey there! I am LUMI G24R. Click here for assistance
+            </div>
     </div>
+    
 
     <script src="../static/script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        easing: 'ease-in-out-sine',
+        offset:0,
+        once:true
+      });
+    </script>
 </body>
 
 </html>
