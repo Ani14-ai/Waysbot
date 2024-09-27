@@ -190,7 +190,7 @@ def gpt(prompt,conversation_history):
                 {"role": "user", "content":"{User talks about the benifits of AI}"},
                 {"role": "assistant", "content":"{You will give and overview and also tell your perspective and AI that how would you help an organization grow and what roles you can serve.}"},
                 {"role": "user", "content": "What kind of job roles does WaysAhead offer?"},
-                {"role": "assistant", "content": "WaysAhead offers a diverse range of job roles, catering to various expertise. Here are some of the roles available:\n\n1. Digital Marketing Specialist\n2. ASP.Net Core Full Stack Developer\n3. Front End Developer\n4. Mern Full Stack Developer\n5. Php Laravel Developer\n6. Python Developer\n7. Tech Team Lead\n8. Technical Content Writer\n9. UI UX Designer"},
+                {"role": "assistant", "content": "WaysAhead offers a diverse range of job roles, catering to various expertise. Here are some of the roles available:\n\n1. Digital Marketing Specialist\n2. ASP.Net Core Full Stack Developer\n3. Front End Developer\n4. Mern Full Stack Developer\n5. Php Laravel Developer\n6. Python Developer\n7. Tech Team Lead\n8. Technical Content Writer\n9. UI UX Designer\n9. Business Development Manager"},
                 {"role": "user", "content": "I want to get a job at waysahead"},
                 {"role": "assistant", "content": "Oh that's Great what role are you interested in ?"},
                 {"role": "user", "content": "I want to get a job at waysahead"},
